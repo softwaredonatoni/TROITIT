@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Problemi di visualizzazione con impostazioni schermo non standard - Troubleshootings IT-IT</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./mdbook-admonish.css">
+        <link rel="stylesheet" href="theme/custom.css">
+        <link rel="stylesheet" href="search.html">
+        <link rel="stylesheet" href="login.html">
+        <link rel="stylesheet" href="searchlogin.html">
+        <link rel="stylesheet" href="searchloginmenu.html">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Troubleshootings IT-IT</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="problemi-di-visualizzazione-con-impostazioni-schermo-non-standard"><a class="header" href="#problemi-di-visualizzazione-con-impostazioni-schermo-non-standard">Problemi di visualizzazione con impostazioni schermo non standard</a></h1>
+<ul>
+<li><a href="#procedura">Procedura</a></li>
+<li><a href="#note">Note</a></li>
+</ul>
+<!--Page="Problemi di visualizzazione con impostazioni schermo non standard"--><p>Installando Parametrix su un computer con impostazioni schermo non standard (es: ridimensionamento 200%), può capitare di riscontrare alcuni problemi:</p><ul><li>visualizzazione anomala delle varie finestre di Parametrix</li><li>visualizzazione anomala di alcune icone di Parametrix</li><li>visualizzazione anomala di render effettuati con la funzionalità di Macchia Aperta</li><li>...</li></ul><p>Per risolvere questo tipo di problemi si può provare ad agire sui DPI dell'applicazione, come spiegato nella seguente procedura.</p>
+<h1 id="procedura"><a class="header" href="#procedura">Procedura</a></h1>
+<p>1 - cliccare con il tasto destro sull'eseguibile di Parametrix</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/01.png" alt="01.png"></p><p><br></p><p>2 - cliccare su "Proprietà"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/02.png" alt="02.png"></p><p><br></p><p>3 - andare nella finestra "Compatibilità"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/03.png" alt="03.png"></p><p><br></p><p>4 - cliccare il pulsante di modifica impostazioni per DPI elevati</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/04.png" alt="04.png"></p><p><br></p><p>5 - provare a modificare le impostazioni, di default dovrebbero esserci i flag non spuntati</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/05.png" alt="05.png"></p><p><br></p><p>6 - provare a modificare "DPI programma"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/06.png" alt="06.png"></p><p><br></p><p>7 - provare a modificare "Esegui l'override del comportamento di ridimensionamento DPI elevati." con le varie opzioni messe a disposizione da "Ridimensionamento eseguito per:"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/07.png" alt="07.png"></p><p><br></p><p>8 - provare a modificare entrambi i flag, con le diverse opzioni messe a disposizione</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/08.png" alt="08.png"></p><p><br></p>
+<h1 id="note"><a class="header" href="#note">Note</a></h1>
+<p>Ad oggi non c'è una soluzione univoca per tutte le casistiche: la combinazione di impostazioni corretta che risolve il problema dipende molto dallo specifico contesto, per questo si suggerisce di provare un passo per volta con i diversi flag.</p><p>La procedura è stata ideata per PC con Windows 10 e Windows 11.</p><p>Su Windows 7 non c'è possibilità di agire su queste impostazioni.</p><p>La combinazione statisticamente più efficace con risoluzione 125% (caso tipico) sembra essere:</p><ul><li>spunta solo sul secondo flag</li><li>dal menu a tendina del secondo flag scegliere l'opzione "Sistema"</li></ul><p><br></p><p><br></p><!--Label="key_prx_05"-->
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="parametrix_viene_chiuso_dal_sistema_operativo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="problemi_dxf.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="parametrix_viene_chiuso_dal_sistema_operativo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="problemi_dxf.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
+        <script src="hidemenu.js"></script>
+        <script src="login.js"></script>
+
+
+    </div>
+    </body>
+</html>

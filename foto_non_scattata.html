@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Foto non scattata - Troubleshootings IT-IT</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./mdbook-admonish.css">
+        <link rel="stylesheet" href="theme/custom.css">
+        <link rel="stylesheet" href="search.html">
+        <link rel="stylesheet" href="login.html">
+        <link rel="stylesheet" href="searchlogin.html">
+        <link rel="stylesheet" href="searchloginmenu.html">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Troubleshootings IT-IT</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="foto-non-scattata"><a class="header" href="#foto-non-scattata">Foto non scattata</a></h1>
+<ul>
+<li><a href="#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="#possibili-cause">Possibili cause</a></li>
+<li><a href="#strumenti-utili">Strumenti utili:</a></li>
+<li><a href="#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="#ripristino-salvataggi">RIPRISTINO SALVATAGGI</a></li>
+<li><a href="#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Foto non scattata"-->
+<h2 id="spiegazione-dellerrore"><a class="header" href="#spiegazione-dellerrore">Spiegazione dell'errore</a></h2>
+<p>Il software smbra partire ma la foto non viene scattata</p>
+<h2 id="possibili-cause"><a class="header" href="#possibili-cause">Possibili cause</a></h2>
+<p>Possono essere hardware o software. Seguire le procedure descritte sotto per identificare la causa e la relativa soluzione.</p>
+<h2 id="strumenti-utili"><a class="header" href="#strumenti-utili">Strumenti utili:</a></h2>
+<ul><li>KillDTwain.exe : reperibile in C:\DTwain\ chiude tutte le istanze del programma rimaste appese,comprese istanze del server.</li><li>StartDTwainServer.bat: reperibile in C:\DTwain\Utility\, apre una nuova istanza del server DTwain.</li><li>DTwainWinDefenderExclusion.exe: reperibile in C:\DTwain\Utility\, aggiunge i processi di DTwain alle esclusioni di Windows Defender.</li><li>OpenPort.Bat C:\DTwain\Utility\, aggiunge la regola per permettere le connessioni di DTwain alle eccezioni di Windows Firewall</li></ul>
+<h2 id="possibili-soluzioni"><a class="header" href="#possibili-soluzioni">Possibili soluzioni</a></h2>
+<ol type="1" start="1"><li>Individuare il programma problematico: DTwain o Parametrix? Aprendo DTwain da solo la foto viene scattata? Se sì allora il problema è Parametrix, altrimenti il problema è effettivamente DTwain.</li><li>Controllare lo stato dei collegamenti: la fotocamera risulta collegata al PC (guardare in Computer)? La fotocamera è visibile al serverino? Risulta collegata? Se no chiedere di premere emergenza e riabilitare i comandi. Adesso la fotocamera risulta visibile? Se no il problema è di tipo hardware(Fotocamera o serverino rotti) o di collegamento(rete macchina /cavo).</li><li>Se tutto il reparto hardware risulta funzionante ispezionare la parte software: per prima cosa aprire il file di log del giorno in cui il problema si è presentato al percorso C:\DTwain\logs\. Ogni riga del file di log rappresenta un messaggio scritto dal programma, ed è così strutturata:<br><br>Tipologia Messaggio | Data Ora | Funzione che ha scritto il messaggio | Messaggio<br><br>Cercare i messaggi di tipologia ERROR, leggere il messaggio per cercare di capire l'errore.</li><li>Alcuni messaggi sono generati dalla libreria software canon, e riportano un messaggio del tipo:  "Errore generato dall'SDK [...informazioni aggiuntive...]: numero errore"; in tal caso l'errore va convertito in notazione esadecimale e confrontato con l'elenco errori reperibile al link seguente:  <a href="http://192.168.1.14:8090/display/SVIL/Errori+SDK+Canon">Errori SDK Canon</a> . In questa maniera è possibile identificare in maniera precisa l'errore. Gli errori più comuni e le relative procedure di risoluzione sono riportati sotto.<br><br></li></ol>
+<h3 id="problemi-comuni-foto-non-scattata"><a class="header" href="#problemi-comuni-foto-non-scattata">PROBLEMI COMUNI FOTO NON SCATTATA:</a></h3>
+<p><strong>Quanto descritto in seguito va fatto sempre DOPO aver seguito il procedimento standard di risoluzione dei problemi.</strong></p><p>Di seguito alcuni problemi noti e relative procedure di risoluzione:</p><ul><li><strong>EDS_ERR_INVALID_HANDLE         </strong>0x00000061L   (<strong>97</strong>) : puntatore alla fotocamera non valido. Normalmente è sufficiente chiudere DTwain, premere emergenza, riabilitare i comandi. In caso di configurazione Pc Ufficio-Pc Macchina sul pc macchina occorre usare il programma KillDTwain.exe , e una volta riabilitati i comandi far ripartire il server usando il programma StartDTwainServer.bat reperibile in C:\DTwain\Utility\ facendolo partire come amministratore. Se l'errore persiste potrebbe essere necessario riavviare il Pc.</li><li><strong>EDS_ERR_DEVICE_BUSY               </strong> 0x00000081L  (<strong>129</strong>): il dispositivo è occupato da un'altra applicazione. Potrebbe esserci un'altro DTwain aperto,o un altro programma (tipo programmi della Canon installati per fare regolazioni delle impostazioni o aggiunti dal cliente). Provare a usare KillDTwain e chiudere eventuali applicazioni che usano la macchina fotografica. Provare un paio di scatti, se il problema persiste premere emergenza e riabilitare i comandi. Se persiste comunque potrebbe essere necessario riavviare il PC.</li><li><strong>EDS_ERR_COMM_PORT_IS_IN_USE   </strong> 0x000000C0L   (<strong>192</strong>): vedi precedente.</li><li><strong>EDS_ERR_TAKE_PICTURE_AF_NG       </strong> 0x00008D01L  (<strong>36097</strong>): l'autofocus è rimasto impostato su automatico e sforza sulla ghiera andando in errore. Impostare fisicamente l'autofocus a manuale sulla fotocamera.</li><li><p class="auto-cursor-target"><strong>Errore Timeout Download Fotocamera:</strong> Per prima cosa controllare che lo sportello della fotocamera si apra normalmente, con lo sportello chiuso la fotocamera rileva un ambiente buio e impiega molti secondi per scattare la foto. Se necessario regolare l'aria dello sportello perchè si apra più velocemente o allungare il tempo di attesa dello sportello in impostazioni>impostazioni fotocamera>Attesa sportello. Di default il parametro è impostato a 2000 millisecondi, se necessario aumentare.<br>In caso di luce ambientale particolarmente scarsa o di lastra scura è possibile che il tempo di attesa per ricevere la foto impostato di default(8 secondi) non sia sufficiente. In tal caso le opzioni sono diverse: se l'errore avviene in fase di installazione e si sa che la situazione ambientale non è un caso isolato ma è la situazione standard di lavoro del cliente è possibile variare i parametri di scatto della fotocamera tramite l'apposita procedura per compensare aumentando l'ISO e/o aumentando la compensazione dell'esposizione per ridurre i tempi di scatto. Se il caso invece è isolato (lastra scura, lampada rotta) e le impostazioni standard vanno bene per il 90% dei casi si può allungare il tempo di attesa: Aprire il file C:\DTwain\DTwainLib.dll.config con un editor di testo (Notepad), cercare il seguente blocco di righe:</p>
+<pre><code>&lt;setting name="downloadPhotoTimeOut" serializeas="String"&gt;
+&lt;value&gt;8000&lt;/value&gt;
+
+</code></pre>
+<p><span style="letter-spacing: 0.0px;color:var(--ds-text,#333);">cambiare il valore 8000 (tempo di attesa in millisecondi) in un valore superiore. Aumentare di 1000, salvare,chiudere il file, provare ad aprire DTwain e scattare la foto. Una volta trovato un valore per cui lo scatto avviene senza problemi aumentare ulteriormente di qualche secondo il valore per fornire un margine di sicurezza maggiore.</span></p></setting></li></ul>
+<h2 id="ripristino-salvataggi"><a class="header" href="#ripristino-salvataggi">RIPRISTINO SALVATAGGI</a></h2>
+<p>In alcuni casi potrebbe essere utile ripristinare DTwain allo stato in cui era alla fine dell'ultima calibrazione eseguita con successo. Per fare ciò è sufficiente scompattare il file backup.zip reperibile all'interno della cartella C:\DTwain\BinFiles,e copiare i due file che ci sono all'interno nella cartella C:\DTwain\BinFiles, avendo cura prima di cancellare(o per sicurezza spostare in una diversa posizione) tutti i file presenti in tale cartella, eccezione fatta per il file di backup.</p><p>In questo modo al successivo avvio il programma sarà nello stato in cui era al termine dell'ultima calibrazione eseguita.</p>
+<h2 id="articoli-collegati"><a class="header" href="#articoli-collegati">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="dtwain"--><!--Label="fotocamera"--><!--Label="kb-troubleshooting-article"--><!--Label="key_dtw05"-->
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="dtwain_vecchio_da_parametrix_appare_richiesta_nome.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="troubleshooting_macchine_vecchie.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="dtwain_vecchio_da_parametrix_appare_richiesta_nome.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="troubleshooting_macchine_vecchie.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
+        <script src="hidemenu.js"></script>
+        <script src="login.js"></script>
+
+
+    </div>
+    </body>
+</html>

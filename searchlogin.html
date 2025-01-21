@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricerca Pagina</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fragment  = window.location.hash.substring(1); // Prende il valore dopo #
+            const [parametro1, parametro2] = fragment.split("|"); // Divide i valori
+            const output = document.getElementById("parametro");
+            const TOKEN = "123";
+            
+            if (!parametro1) {
+                output.textContent = "Nessun parametro passato.";
+                return;
+            }
+
+            if (parametro1 === TOKEN) 
+            {
+                sessionStorage.setItem("isLoggedIn", "true");   
+            }
+
+            if (!parametro2) {
+                output.textContent = "Nessun parametro passato.";
+                return;
+            }
+
+            output.textContent = `Parametro passato: ${parametro2}`;
+
+            // Cerca tutte le corrispondenze nel body
+            const mappings = document.querySelectorAll("p#mapping");
+            for (const mapping of mappings) {
+                const [key, value] = mapping.textContent.split("=");
+                if (key === parametro2) {
+                    window.location.href = value.trim(); // Reindirizza l'utente alla pagina corrispondente
+                    return;
+                }
+            }
+
+            var msg = `Nessuna pagina trovata con questa etichetta: ${parametro2}`;
+
+            alert(msg);
+        });
+    </script>
+        <style>
+            p#mapping { display: none; }
+        </style>
+</head>
+<body>
+    <h1>Ricerca della Pagina</h1>
+    <p id="parametro">Attendi mentre cerchiamo la pagina corrispondente...</p>
+    
+    <!-- Mappatura parametri-pagine -->
+<p id="mapping">favourite=pagina_di_test.html</p>
+<p id="mapping">e1=pagina_di_test.html</p>
+<p id="mapping">e2=pagina_di_test.html</p>
+<p id="mapping">test_etichetta=sotto_pagina.html</p>
+</body>
+</html>

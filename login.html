@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login</title>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('images/login.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 30px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<p style="background-image: url('images\login.jpg');">
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="authenticate()">Login</button>
+        <div id="error-message" class="error"></div>
+
+    </div>
+		
+    <script>
+        // Hardcoded credentials
+        const USERNAME = "admin";
+        const PASSWORD = "123";
+
+        function authenticate() {
+            // Get input values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Clear any previous error message
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = '';
+
+            // Check credentials
+    if (username === USERNAME && password === PASSWORD) 
+    {
+        sessionStorage.setItem("isLoggedIn", "true");
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 1000); 
+    } else {
+        errorMessage.textContent = 'Username o password non validi';
+    }
+        }
+    </script>
+</body>
+</html>

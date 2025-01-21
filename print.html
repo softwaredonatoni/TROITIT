@@ -1,0 +1,986 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Troubleshootings IT-IT</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./mdbook-admonish.css">
+        <link rel="stylesheet" href="theme/custom.css">
+        <link rel="stylesheet" href="search.html">
+        <link rel="stylesheet" href="login.html">
+        <link rel="stylesheet" href="searchlogin.html">
+        <link rel="stylesheet" href="searchloginmenu.html">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Troubleshootings IT-IT</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="troubleshootings-it-it-home"><a class="header" href="#troubleshootings-it-it-home">Troubleshootings IT-IT Home</a></h1>
+<ul>
+<li><a href="troubleshootings_it-it_home.html#elenco-pagine">Elenco pagine</a></li>
+<li><a href="troubleshootings_it-it_home.html#elenco-tag">Elenco TAG</a></li>
+</ul>
+<!--Page="Troubleshootings IT-IT Home"-->
+<h2 id="elenco-pagine"><a class="header" href="#elenco-pagine">Elenco pagine</a></h2>
+<p><p>
+<!--<<structured-macro ac:name="pagetree" ac:schema-version="1" ac:local-id="67a75613-b3fc-4ee4-afa2-127714e49cc8" ac:macro-id="4db734a15ac0fd2c9ad2ed9542afbcbe9b1778bb3e293bca960dd4b267c1ef75"><parameter ac:name="startDepth">2</parameter></structured-macro>>-->
+</p></p>
+<h2 id="elenco-tag"><a class="header" href="#elenco-tag">Elenco TAG</a></h2>
+<p>
+<!--<<structured-macro ac:name="content-report-table" ac:schema-version="1" data-layout="default" ac:local-id="872cacf0-ba80-4f64-a4e5-f1075fdd86c7" ac:macro-id="d685940c-c2bf-433f-ac5f-d0459c475be2"><parameter ac:name="isMissingRequiredParameters">true</parameter></structured-macro>>-->
+</p><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-articles"><a class="header" href="#troubleshooting-articles">Troubleshooting articles</a></h1>
+<!--Page="Troubleshooting articles"--><p style="text-align: right;"><p>
+<!--<<structured-macro ac:name="listlabels" ac:schema-version="1" ac:macro-id="5cb8288d-e856-4487-a9db-b632316077f4"></structured-macro>>-->
+</p><p>
+<!--<<structured-macro ac:name="create-from-template" ac:schema-version="1" ac:macro-id="209bffae-0912-48a7-8c0f-78d3832445ac"><parameter ac:name="blueprintModuleCompleteKey">com.atlassian.confluence.plugins.confluence-knowledge-base:kb-troubleshooting-article-blueprint</parameter><parameter ac:name="contentBlueprintId">6907cd24-df96-4a79-bdfe-cd154cd7538b</parameter><parameter ac:name="createButtonLabel">Add troubleshooting article</parameter></structured-macro>>-->
+</p></p><p><p>
+<!--<<structured-macro ac:name="pagetree" ac:schema-version="1" ac:macro-id="91474be5-a38e-4cc3-b22e-1d640cb31577"><parameter ac:name="root"><link></parameter><parameter ac:name="sort">natural</parameter></structured-macro>>-->
+</p></p><hr><!--Label="blueprint-index-page"--><!--Label="key_mainpagetrouble"--><!--Label="home_troubleshooting"--><div style="break-before: page; page-break-before: always;"></div><h1 id="misure-pezzi-errate"><a class="header" href="#misure-pezzi-errate">Misure pezzi errate</a></h1>
+<!--Page="Misure pezzi errate"--><p>Verificare i dati utensile</p>
+<h3 id="tagli-inclinati"><a class="header" href="#tagli-inclinati">Tagli inclinati</a></h3>
+<ol type="1" start="1"><li>Muovi il disco per toccare la panca</li><li>Acquisisci la quota di panchina</li><li>Reimposta l'asse Z</li><li>Spostare il disco sulla superficie del materiale e toccarlo</li><li>Leggi il valore nell'asse Z (questo è lo spessore)</li><li>Inserisci questo valore nello spessore del materiale</li><li>Provare a tagliare senza l'uso della sonda.</li></ol><!--Label="key_nocode_01"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0000-emergenza-generale"><a class="header" href="#pe0000-emergenza-generale">PE0000 Emergenza generale</a></h1>
+<ul>
+<li><a href="pe0000_emergenza_generale.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0000_emergenza_generale.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0000_emergenza_generale.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0000_emergenza_generale.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0000 Emergenza generale"--><hr>
+<h2 id="spiegazione-dellerrore"><a class="header" href="#spiegazione-dellerrore">Spiegazione dell'errore</a></h2>
+<p>Macchina in situazione di emergenza, la lampadina rossa è lampeggiante e la macchina non si muove. Il circuito delle emergenze risulta aperto.</p>
+<h2 id="possibili-cause"><a class="header" href="#possibili-cause">Possibili cause</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Fungo di emergenza premuto;</li><li>Guasto del fungo di emergenza;</li><li>Guasto della centralina di sicurezza all'interno del quadro eletrrico;</li><li>Cavo multipolare collegato dalla consolle al quadro elettrico guasto;</li></ol></div>
+<h2 id="possibili-soluzioni"><a class="header" href="#possibili-soluzioni">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Sbloccare fungo di emergenza:<div><img src="attachments/PE0000_Emergenza_generale/IMG_20181112_110712.jpg" alt="IMG_20181112_110712.jpg"></div><br><hr></li><li>Controllare il corretto funzionamento del fungo e dei contatti elettrici collegati posti al di sotto del fungo stesso (pulsantiera consolle);<br><div><img src="attachments/PE0000_Emergenza_generale/IMG_20181112_110548.jpg" alt="IMG_20181112_110548.jpg"></div><hr></li><li>Controllare il corretto funzionamento della centralina ovvero, una volta verificato che il circuito delle emergenze come da schema elettrico sia chiuso, la centralina dovrà funzionare nel seguente modo:<br><ol type="a" start="1"><li>Con fungo di emergenza premuto (circuito delle emergenze aperto):<br><div><img src="attachments/PE0000_Emergenza_generale/IMG_20181112_110804.jpg" alt="IMG_20181112_110804.jpg"></div><hr></li><li>Con fungo di emergenza rilasciato(circuito emergenza chiuso):<br><div><img src="attachments/PE0000_Emergenza_generale/IMG_20181112_110817.jpg" alt="IMG_20181112_110817.jpg"></div></li></ol><hr></li><li>Verificare la continuità tra i cavi collegati sui contatti del fungo e i rispettivi cavi collegati nella morsettiera relativa nel quadro elettrico reperire le info sullo schema;</li></ol><p><br></p><p><br></p></div>
+<h2 id="articoli-collegati"><a class="header" href="#articoli-collegati">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><p><br></p><p class="MsoListParagraph" style="text-indent: -18.0pt;line-height: normal;">1.<span style="font-size: 7.0pt;line-height: normal;font-family: &quot;Times New Roman&quot;;">       </span>Controllare il corretto funzionamento della centralina ovvero, una volta verificato che il circuito delle emergenze come da schema elettrico sia chiuso, la centralina dovrà funzionare nel seguente modo:</p><!--Label="sicurezza"--><!--Label="consolle"--><!--Label="key_pe0000"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0003-mancanza-tensione-di-rete"><a class="header" href="#pe0003-mancanza-tensione-di-rete">PE0003 Mancanza tensione di rete</a></h1>
+<ul>
+<li><a href="pe0003_mancanza_tensione_di_rete.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0003_mancanza_tensione_di_rete.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0003_mancanza_tensione_di_rete.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0003_mancanza_tensione_di_rete.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0003 Mancanza tensione di rete"-->
+<h2 id="spiegazione-dellerrore-1"><a class="header" href="#spiegazione-dellerrore-1">Spiegazione dell'errore</a></h2>
+<p>La macchina si trova in una situazione di allarme in quanto la tensione di alimentazione generale del quadro risulta assente, la macchina si spegnerà in automatico dopo un minuto per salvaguardare i componenti elettronici.</p>
+<h2 id="possibili-cause-1"><a class="header" href="#possibili-cause-1">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Mancanza di tensione in ingresso al quadro elettrico;</li><li>Relè di tensione presente su UPS guasto o collegamenti non corretti;</li></ol></div>
+<h2 id="possibili-soluzioni-1"><a class="header" href="#possibili-soluzioni-1">Possibili soluzioni</a></h2>
+<p>Si consiglia l'ausilio di un tecnico Donatoni presente sul posto o di un elettricista.</p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><div><img src="attachments/PE0003_Mancanza_tensione_di_rete/IMG_7642.JPG" alt="IMG_7642.JPG"></div><hr><br><ol type="1" start="1"><li>Controllare con un Multimetro in funzionalità AC se all'ingresso dell'interruttore generale della macchina sia presente la tensione, in caso non ci sia tensione il problema è a monte della macchina;<div><img src="attachments/PE0003_Mancanza_tensione_di_rete/IMG_7645.JPG" alt="IMG_7645.JPG"></div><hr></li><li>Controllare se al relè relativo alla tensione presente su UPS arrivi in ingresso i 220 V in AC e in uscita ci siano 0 V in DC (il relè deve essere collegato NC);<br><div><img src="attachments/PE0003_Mancanza_tensione_di_rete/IMG_7643.JPG" alt="IMG_7643.JPG"></div><br><br><div><img src="attachments/PE0003_Mancanza_tensione_di_rete/IMG_7644.JPG" alt="IMG_7644.JPG"></div><hr></li></ol></div>
+<h2 id="articoli-collegati-1"><a class="header" href="#articoli-collegati-1">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="elettrico"--><!--Label="quadro"--><!--Label="key_pe0003"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0005-mancanza-abilitazione-comandi"><a class="header" href="#pe0005-mancanza-abilitazione-comandi">PE0005 Mancanza abilitazione comandi</a></h1>
+<ul>
+<li><a href="pe0005_mancanza_abilitazione_comandi.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0005_mancanza_abilitazione_comandi.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0005_mancanza_abilitazione_comandi.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0005_mancanza_abilitazione_comandi.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0005 Mancanza abilitazione comandi"-->
+<h2 id="spiegazione-dellerrore-2"><a class="header" href="#spiegazione-dellerrore-2">Spiegazione dell'errore</a></h2>
+<p>Viene visualizzato all'accensione della macchina o successivamente al rilascio del fungo di emergenza. </p>
+<h2 id="possibili-cause-2"><a class="header" href="#possibili-cause-2">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Il pulsante di abilitazione comandi (RESET) non è stato premuto;</li><li>Malfunzionamento del pulsante abilitazione comandi (RESET) sul quadro elettrico;</li><li>Malfunzionamento centralina di sicurezza Pilz.</li></ol></div>
+<h2 id="possibili-soluzioni-2"><a class="header" href="#possibili-soluzioni-2">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante reset sul quadro elettrico<div><img src="attachments/PE0005_Mancanza_abilitazione_comandi/IMG_7648.JPG" alt="IMG_7648.JPG"></div><hr></li><li>Controllare contatti del pulsante di abilitazione comandi ovvero quando tengo premuto il pulsante il contatto deve chiudersi e deve apparire sulla centralina il led di start verde in caso sostituire i contatti del pulsante;<div><img src="attachments/PE0005_Mancanza_abilitazione_comandi/IMG_20181112_110817.jpg" alt="IMG_20181112_110817.jpg"></div><br><div><img src="attachments/PE0005_Mancanza_abilitazione_comandi/IMG_7649.JPG" alt="IMG_7649.JPG"></div><hr></li></ol></div>
+<h2 id="articoli-collegati-2"><a class="header" href="#articoli-collegati-2">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="sicurezza"--><!--Label="key_pe0005"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0006-termico-pompa-banco-attivo"><a class="header" href="#pe0006-termico-pompa-banco-attivo">PE0006 Termico pompa banco attivo</a></h1>
+<ul>
+<li><a href="pe0006_termico_pompa_banco_attivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0006_termico_pompa_banco_attivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0006_termico_pompa_banco_attivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0006_termico_pompa_banco_attivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0006 Termico pompa banco attivo"-->
+<h2 id="spiegazione-dellerrore-3"><a class="header" href="#spiegazione-dellerrore-3">Spiegazione dell'errore</a></h2>
+<p>Anomalia sull'impianto di sollevamento banco; L'interruttore magnetotermico relativo al banco è scattato, esso offre una protezione sull'impianto sia ai cortocircuiti sia ai sovraccarichi. Per riarmare l'interruttore spostare il selettore a 0 e successivamente a 1;<div><img src="attachments/PE0006_Termico_pompa_banco_attivo/IMG_7651_-_Copia.JPG" alt="IMG_7651_-_Copia.JPG"></div><hr><p><br></p><p style="text-align: center;"><img src="attachments/PE0006_Termico_pompa_banco_attivo/IMG_7653.JPG" alt="IMG_7653.JPG"></p><hr><p><br></p>
+<h2 id="possibili-cause-3"><a class="header" href="#possibili-cause-3">Possibili cause</a></h2>
+<p>Le cause possono essere suddivise in problemi Meccanici o Elettrici</p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Problemi meccanici:<br><ol type="1" start="1"><li>Motore pompa olio bloccato, si può provare ad avviare la pompa del banco e vedere se effettivamente gira in caso di bloccaggio completo si cambia la pompa dell'olio;</li><li>L'olio all'interno del serbatoio è insufficiente;</li><li>L'olio all'interno del serbatoio è poco e molto sporco o il filtro è sporco;</li><li>Banco ribaltabile bloccato</li></ol></div><p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Problemi elettrici:<br><ol type="1" start="1"><li>Cortocircuito tra fasi motore;</li><li>Mancanza di una fase;</li><li>Cortocircuito avvolgimenti del motore;</li><li>Interruttore Guasto</li></ol></div>
+<h2 id="possibili-soluzioni-3"><a class="header" href="#possibili-soluzioni-3">Possibili soluzioni</a></h2>
+<p>Nelle foto sottostanti c'è la pompa con segnati i relativi punti di interesse;<div><img src="attachments/PE0006_Termico_pompa_banco_attivo/IMG_7655.JPG" alt="IMG_7655.JPG"></div><hr><p><div><img src="attachments/PE0006_Termico_pompa_banco_attivo/IMG_7656.JPG" alt="IMG_7656.JPG"></div><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>MECCANICHE<br><ol type="1" start="1"><li>Per prima cosa controllare che la ventolina di raffreddamento del motore giri libera, ovvero con un cacciavite per esempio provare a muovere la ventolina, se risulta bloccata la pompa si deve cambiare .</li><li>Controllare il livello dell'olio con una bacchetta pulita, e controllare se si hanno dei depositi sul fondo:<br><ol type="a" start="1"><li>se il livello è basso rabboccare con Olio densità 32 e tenere periodicamente sotto occhio l'impianto se si svuota nuovamente poiché potrebbero esserci perdite;</li><li>se è presente molto sporco svuotare il serbatoio (c'è un tappo nel serbatoio) e pulirlo con il gasolio e successivamente riempirlo;</li></ol></li><li>Controllare se gli snodi del pistone e gli snodi dei banchi non siano bloccati quindi successivamente ingrassare nei relativi punti.<div><img src="attachments/PE0006_Termico_pompa_banco_attivo/banco.JPG" alt="banco.JPG"></div></li></ol></div><p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>ELETTRICHE → è consigliato l'ausilio di un elettricista o tecnico Donatoni presente sul posto<br><ol type="1" start="1"><li>Controllare che non ci sia continuità tra le varie fasi; scollegare il cavo dalla scatola elettrica della pompa, isolare i terminali e riarmare l'interruttore attivare la pompa dell'olio se scatta il problema potrebbe essere il cavo;</li><li>Misurare la tensione in ingresso con un multimetro e verificare la presenza di tutte le fasi, se manca ad esempio una fase controllare che siano tirati tutti i morsetti;</li><li>Se effettuando la prova al punto 1 l'interruttore non scatta, collegare il cavo alla pompa, se, avviando la pompa l'interruttore scatta il problema è la pompa quindi sarà da sostituire;</li></ol></div>
+<h2 id="articoli-collegati-3"><a class="header" href="#articoli-collegati-3">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="elettrico"--><!--Label="quadro"--><!--Label="key_pe0006"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0007-termico-disco-attivo"><a class="header" href="#pe0007-termico-disco-attivo">PE0007 Termico disco attivo</a></h1>
+<ul>
+<li><a href="pe0007_termico_disco_attivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0007_termico_disco_attivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0007_termico_disco_attivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0007_termico_disco_attivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0007 Termico disco attivo"-->
+<h2 id="spiegazione-dellerrore-4"><a class="header" href="#spiegazione-dellerrore-4">Spiegazione dell'errore</a></h2>
+<p>L’allarme termico disco è generato qualora l’inverter che gestisce la rotazione del mandrino abbia malfunzionamenti.</p>
+<h2 id="possibili-cause-4"><a class="header" href="#possibili-cause-4">Possibili cause</a></h2>
+<p>Le cause di questo errore sono da valutare di volta in volta poiché si dovrà aprire il quadro elettrico e controllare i messaggi di errore dell'inverter.</p><p>NB: per aprire il quadro elettrico effettuare la procedura di <p><a href='apertura_quadro_elettrico_acceso.html'>Apertura quadro elettrico acceso</a></p><p><a href='attachments/PE0007_Termico_disco_attivo/Messaggi_errore_Inverter.pdf'>Messaggi_errore_Inverter.pdf</a></p>
+<h2 id="possibili-soluzioni-4"><a class="header" href="#possibili-soluzioni-4">Possibili soluzioni</a></h2>
+<p>Le soluzioni al problema dipenderanno dallo stato dell'inverter, importante è valutare se il problema è dato dai collegamenti Post inverter o Pre inverter:</p><p> Per esempio provare a scollegare il cavo del mandrino e provare ad avviare il disco e vedere se si ripresenta l'errore.</p>
+<h2 id="articoli-collegati-4"><a class="header" href="#articoli-collegati-4">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="inverter"--><!--Label="elettrico"--><!--Label="quadro"--><!--Label="key_pe0007"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0008-fc-collisione-attivo"><a class="header" href="#pe0008-fc-collisione-attivo">PE0008 FC collisione attivo</a></h1>
+<ul>
+<li><a href="pe0008_fc_collisione_attivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0008_fc_collisione_attivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0008_fc_collisione_attivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0008_fc_collisione_attivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0008 FC collisione attivo"-->
+<h2 id="spiegazione-dellerrore-5"><a class="header" href="#spiegazione-dellerrore-5">Spiegazione dell'errore</a></h2>
+<p>Lo stato del sensore del Finecorsa collisione posto sopra alla chiocciola dell'asse Z è cambiato di stato.</p><p style="text-align: center;"><img src="attachments/PE0008_FC_collisione_attivo/IMG_7709.JPG" alt="IMG_7709.JPG"><img src="attachments/PE0008_FC_collisione_attivo/IMG_7707.JPG" alt="IMG_7707.JPG"></p><hr><p style="text-align: center;"><br></p>
+<h2 id="possibili-cause-5"><a class="header" href="#possibili-cause-5">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Le cause della comparsa di questo errore sono molteplici:<br><ol type="1" start="1"><li>La macchina si trova piantata nel materiale o nel banco e quindi il sensore sopra la chiocciola dell'asse Z si trova coperto;</li><li>il sensore è guasto</li><li style="text-align: left;">il cavo dal sensore al ripartitore passivo sul carro guasto;<br><div><img src="attachments/PE0008_FC_collisione_attivo/IMG_7710.JPG" alt="IMG_7710.JPG"></div><div><img src="attachments/PE0008_FC_collisione_attivo/IMG_7711.JPG" alt="IMG_7711.JPG"></div><br><hr></li><li>possibili guasti nei cavi dal ripartitore passivo al quadro</li></ol></div>
+<h2 id="possibili-soluzioni-5"><a class="header" href="#possibili-soluzioni-5">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere pulsante reset sulla consolle in maniera da fare sparire il messaggio di errore riguardante la collisione, e alzarsi lentamente con l'asse Z fino a sollevarsi dal banco/materiale</li><li>Verificare il funzionamento del sensore, ovvero verificare che sia acceso il led sul sensore, e verificare che posizionando un pezzo metallico davanti il sensore il led si spegne; in caso di sensore malfunzionante sostituire;<br><div><img src="attachments/PE0008_FC_collisione_attivo/IMG_7708.JPG" alt="IMG_7708.JPG"></div><hr></li><li>se il sensore è spento, provare a cambiare ingresso nel ripartitore passivo e vedere se il sensore si accende (ad es collegarlo al posto del sensore asse X), se non si hanno differenze il problema potrebbe essere il cavo o i collegamenti fino al quadro.</li></ol></div>
+<h2 id="articoli-collegati-5"><a class="header" href="#articoli-collegati-5">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="sensore"--><!--Label="key_pe0008"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0009-rich-quota-collisione"><a class="header" href="#pe0009-rich-quota-collisione">PE0009 Rich. quota collisione</a></h1>
+<ul>
+<li><a href="pe0009_rich._quota_collisione.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0009_rich._quota_collisione.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0009_rich._quota_collisione.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0009_rich._quota_collisione.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0009 Rich. quota collisione"-->
+<h2 id="spiegazione-dellerrore-6"><a class="header" href="#spiegazione-dellerrore-6">Spiegazione dell'errore</a></h2>
+<p>Questo messaggio di errore appare ogni volta che si comanda alla macchina in MDI di posizionarsi ad una quota fuori dai limiti delle corse software della macchina;</p>
+<h2 id="possibili-cause-6"><a class="header" href="#possibili-cause-6">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Si è impostata la quota banco molto alta;</li><li>Si comanda la macchina in MDI di andare in un punto che non può raggiungere con le sue corse.<br><br></li></ol></div>
+<h2 id="possibili-soluzioni-6"><a class="header" href="#possibili-soluzioni-6">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Una volta che compare l'errore, premere il pulsante di reset sulla consolle, e verificare l'effettiva quota banco utilizzando i comandi manuali della consolle (verificare valore diametro disco ecc. stare attenti anche all'invlinazione asse A)</li><li>Controllare se effettivamente se la macchina riesce a raggiungere le quote obiettivo che vengono impostate;</li></ol></div>
+<h2 id="articoli-collegati-6"><a class="header" href="#articoli-collegati-6">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="manuale"--><!--Label="key_pe0009"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0010-extracorrente-asse-x"><a class="header" href="#pe0010-extracorrente-asse-x">PE0010 Extracorrente asse X</a></h1>
+<ul>
+<li><a href="pe0010_extracorrente_asse_x.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0010_extracorrente_asse_x.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0010_extracorrente_asse_x.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0010_extracorrente_asse_x.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0010 Extracorrente asse X"-->
+<h2 id="spiegazione-dellerrore-7"><a class="header" href="#spiegazione-dellerrore-7">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente per ogni singolo asse, dovuto al superamento della portata massima di sforzo del motore in questione. </p>
+<h2 id="possibili-cause-7"><a class="header" href="#possibili-cause-7">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Sforzo eccessivo istantaneo in direzione X</li><li>Malfunzionamento motore asse X</li></ol></div>
+<h2 id="possibili-soluzioni-7"><a class="header" href="#possibili-soluzioni-7">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante di reset, per resettare l'errore, successivamente premere il pulsante di emergenza, riabilitare i comandi e riprendere il normale utilizzo;</li><li>Dopo avere provato ad eseguire il punto 1, se si ripresenta l'errore muovendosi a vuoto in qualunque direzione, sostituire il motore asseX</li></ol></div>
+<h2 id="articoli-collegati-7"><a class="header" href="#articoli-collegati-7">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0010"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0011-extracorrente-asse-y"><a class="header" href="#pe0011-extracorrente-asse-y">PE0011 Extracorrente asse Y</a></h1>
+<ul>
+<li><a href="pe0011_extracorrente_asse_y.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0011_extracorrente_asse_y.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0011_extracorrente_asse_y.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0011_extracorrente_asse_y.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0011 Extracorrente asse Y"-->
+<h2 id="spiegazione-dellerrore-8"><a class="header" href="#spiegazione-dellerrore-8">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente per ogni singolo asse, dovuto al superamento della portata massima di sforzo del motore in questione.</p>
+<h2 id="possibili-cause-8"><a class="header" href="#possibili-cause-8">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Sforzo eccessivo istantaneo in direzione Y</li><li>Malfunzionamento motore asse Y</li></ol></div>
+<h2 id="possibili-soluzioni-8"><a class="header" href="#possibili-soluzioni-8">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante di reset, per resettare l'errore, successivamente premere il pulsante di emergenza, riabilitare i comandi e riprendere il normale utilizzo;</li><li>Dopo avere provato ad eseguire il punto 1, se si ripresenta l'errore muovendosi a vuoto in qualunque direzione, sostituire il motore asseY</li></ol></div>
+<h2 id="articoli-collegati-8"><a class="header" href="#articoli-collegati-8">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0011"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0012-extracorrente-asse-z"><a class="header" href="#pe0012-extracorrente-asse-z">PE0012 Extracorrente asse Z</a></h1>
+<ul>
+<li><a href="pe0012_extracorrente_asse_z.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0012_extracorrente_asse_z.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0012_extracorrente_asse_z.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0012_extracorrente_asse_z.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0012 Extracorrente asse Z"-->
+<h2 id="spiegazione-dellerrore-9"><a class="header" href="#spiegazione-dellerrore-9">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente per ogni singolo asse, dovuto al superamento della portata massima di sforzo del motore in questione. </p>
+<h2 id="possibili-cause-9"><a class="header" href="#possibili-cause-9">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Sforzo eccessivo istantaneo in direzione Z</li><li>Malfunzionamento motore asse Z</li></ol></div>
+<h2 id="possibili-soluzioni-9"><a class="header" href="#possibili-soluzioni-9">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante di reset, per resettare l'errore, successivamente premere il pulsante di emergenza, riabilitare i comandi e riprendere il normale utilizzo;</li><li>Dopo avere provato ad eseguire il punto 1, se si ripresenta l'errore muovendosi a vuoto, in qualunque direzione sostituire il motore asse Z</li></ol></div>
+<h2 id="articoli-collegati-9"><a class="header" href="#articoli-collegati-9">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0012"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0013-extracorrente-asse-a"><a class="header" href="#pe0013-extracorrente-asse-a">PE0013 Extracorrente asse A</a></h1>
+<ul>
+<li><a href="pe0013_extracorrente_asse_a.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0013_extracorrente_asse_a.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0013_extracorrente_asse_a.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0013_extracorrente_asse_a.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0013 Extracorrente asse A"-->
+<h2 id="spiegazione-dellerrore-10"><a class="header" href="#spiegazione-dellerrore-10">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente per ogni singolo asse, dovuto al superamento della portata massima di sforzo del motore in questione. </p>
+<h2 id="possibili-cause-10"><a class="header" href="#possibili-cause-10">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Sforzo eccessivo istantaneo in direzione A</li><li>Malfunzionamento motore asse A</li></ol></div>
+<h2 id="possibili-soluzioni-10"><a class="header" href="#possibili-soluzioni-10">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante di reset, per resettare l'errore, successivamente premere il pulsante di emergenza, riabilitare i comandi e riprendere il normale utilizzo;</li><li>Dopo avere provato ad eseguire il punto 1, se si ripresenta l'errore muovendosi a vuoto, in qualunque direzione sostituire il motore asse A;</li></ol></div>
+<h2 id="articoli-collegati-10"><a class="header" href="#articoli-collegati-10">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0013"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0014-extracorrente-asse-c"><a class="header" href="#pe0014-extracorrente-asse-c">PE0014 Extracorrente asse C</a></h1>
+<ul>
+<li><a href="pe0014_extracorrente_asse_c.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0014_extracorrente_asse_c.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0014_extracorrente_asse_c.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0014_extracorrente_asse_c.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0014 Extracorrente asse C"-->
+<h2 id="spiegazione-dellerrore-11"><a class="header" href="#spiegazione-dellerrore-11">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente per ogni singolo asse, dovuto al superamento della portata massima di sforzo del motore in questione. </p>
+<h2 id="possibili-cause-11"><a class="header" href="#possibili-cause-11">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Sforzo eccessivo istantaneo in direzione C</li><li>Malfunzionamento motore asse C</li></ol></div>
+<h2 id="possibili-soluzioni-11"><a class="header" href="#possibili-soluzioni-11">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Premere il pulsante di reset, per resettare l'errore, successivamente premere il pulsante di emergenza, riabilitare i comandi e riprendere il normale utilizzo;</li><li>Dopo avere provato ad eseguire il punto 1, se si ripresenta l'errore muovendosi a vuoto, in qualunque direzione sostituire il motore asse C;</li></ol></div>
+<h2 id="articoli-collegati-11"><a class="header" href="#articoli-collegati-11">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0014"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0015-extracorrente-mandrino"><a class="header" href="#pe0015-extracorrente-mandrino">PE0015 Extracorrente mandrino</a></h1>
+<ul>
+<li><a href="pe0015_extracorrente_mandrino.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0015_extracorrente_mandrino.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0015_extracorrente_mandrino.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0015_extracorrente_mandrino.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0015 Extracorrente mandrino"-->
+<h2 id="spiegazione-dellerrore-12"><a class="header" href="#spiegazione-dellerrore-12">Spiegazione dell'errore</a></h2>
+<p>Durante i cicli di lavoro automatico il plc può generare un allarme di Extracorrente dell' elettromandrino, dovuto al superamento della portata massima di sforzo del motore in questione. La soglia viene impostata in base al tipo di lavorazione, e di conseguenza al numero di giri dell' elettromandrino.</p><p>Generalmente si inizia una lavorazione, si guarda il valore dell'assorbimento del disco/fresa successivamente si imposterà una valore di soglia 3/5A maggiore rispetto il valore assorbito durante il normale funzionamento.</p><p><div><img src="attachments/PE0015_Extracorrente_mandrino/Cattura1.jpg" alt="Cattura1.jpg"></div><hr><p><br></p>
+<h2 id="possibili-cause-12"><a class="header" href="#possibili-cause-12">Possibili cause</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Impostato un valore di soglia dell'allarme non corretto per il tipo di lavorazione;</li><li>Assorbimento elettromandrino troppo elevato dovuto a lavorazioni con velocità troppo elevate.</li><li>Utensile non adatto al tipo di lavorazione effettuata</li><li>Cuscinetti da sostituire</li></ol></div>
+<h2 id="possibili-soluzioni-12"><a class="header" href="#possibili-soluzioni-12">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Correggere il valore di soglia ampere</li><li>Diminuire gradualmente le velocità fino a trovare le velocità corrette</li><li>Controllare l'utensile se è adatto alle lavorazioni che si stanno eseguendo, e se non è un utensile molto consumato e quindi non taglia</li></ol></div>
+<h2 id="articoli-collegati-12"><a class="header" href="#articoli-collegati-12">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="extracorrente"--><!--Label="key_pe0015"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0016-mancanza-acqua"><a class="header" href="#pe0016-mancanza-acqua">PE0016 Mancanza acqua</a></h1>
+<ul>
+<li><a href="pe0016_mancanza_acqua.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0016_mancanza_acqua.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0016_mancanza_acqua.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0016_mancanza_acqua.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0016 Mancanza acqua"-->
+<h2 id="spiegazione-dellerrore-13"><a class="header" href="#spiegazione-dellerrore-13">Spiegazione dell'errore</a></h2>
+<p>Questo allarme è legato alla mancanza del segnale di ingresso del pressostato dell'acqua del disco, durante un ciclo automatico.</p><p>I pressostati sono in questa posizione e sono di due tipi:</p><p style="text-align: center;"><img src="attachments/PE0016_Mancanza_acqua/IMG_0002.JPG" alt="IMG_0002.JPG"></p><hr><p style="text-align: center;"><br></p><p style="text-align: center;"><img src="attachments/PE0016_Mancanza_acqua/IMG_0005.JPG" alt="IMG_0005.JPG"><img src="attachments/PE0016_Mancanza_acqua/IMG_0004.JPG" alt="IMG_0004.JPG"></p><hr><p style="text-align: center;"><br></p>
+<h2 id="possibili-cause-13"><a class="header" href="#possibili-cause-13">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Le possibilità sono molteplici:<br><ol type="1" start="1"><li>Mancanza effettiva dell'acqua;</li><li>Pressostato regolato per una pressione dell'acqua troppo alta;</li><li>Pressostato guasto;</li><li>Guasto tra collegamenti pressostato quadro.</li></ol></div>
+<h2 id="possibili-soluzioni-13"><a class="header" href="#possibili-soluzioni-13">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Controllare le motivazioni della mancanza d'acqua, se magari è solamente un calo di pressione.</li><li>Regolare il pressostato alla pressione desiderata, per la regolazione dei pressostati seguire la procedura di regolazione in base al tipo di pressostato <p><a href='attachments/PE0016_Mancanza_acqua/Regolazione_pressostati_ita.pdf'>Regolazione_pressostati_ita.pdf</a></p></li><li>Sostituzione del pressostato con uno dello stesso tipo possibilmente;</li><li>Controllare seguendo lo <p><a href='schema_elettrico_jet.html'>SCHEMA ELETTRICO JET</a></p></li></ol></div>
+<h2 id="articoli-collegati-13"><a class="header" href="#articoli-collegati-13">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="pressostato"--><!--Label="elettrovalvola"--><!--Label="carro"--><!--Label="key_pe0016"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0018-feed-nulla--impostare--0"><a class="header" href="#pe0018-feed-nulla--impostare--0">PE0018 Feed Nulla  impostare  0</a></h1>
+<ul>
+<li><a href="pe0018_feed_nulla__impostare__0.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0018_feed_nulla__impostare__0.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0018_feed_nulla__impostare__0.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0018_feed_nulla__impostare__0.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0018 Feed Nulla  impostare  0"-->
+<h2 id="spiegazione-dellerrore-14"><a class="header" href="#spiegazione-dellerrore-14">Spiegazione dell'errore</a></h2>
+<p>Messaggio di errore che compare durante l'avvio di un ciclo automatico o semiautomatico, dovuto al fatto che qualche velocità di lavorazione è impostata a zero;</p>
+<h2 id="possibili-cause-14"><a class="header" href="#possibili-cause-14">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Impostata una o più velocità di lavorazione a 0mm/min sia in cicli automatici che in cicli semiautomatici;</li></ol></div>
+<h2 id="possibili-soluzioni-14"><a class="header" href="#possibili-soluzioni-14">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Cambiare i parametri di velocità di lavorazione con delle velocità diverse da zero</li></ol></div>
+<h2 id="articoli-collegati-14"><a class="header" href="#articoli-collegati-14">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="parametri"--><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0018"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0019-errore-su-azionamenti"><a class="header" href="#pe0019-errore-su-azionamenti">PE0019 Errore su azionamenti</a></h1>
+<ul>
+<li><a href="pe0019_errore_su_azionamenti.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0019_errore_su_azionamenti.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0019_errore_su_azionamenti.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0019_errore_su_azionamenti.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0019 Errore su azionamenti"-->
+<h2 id="spiegazione-dellerrore-15"><a class="header" href="#spiegazione-dellerrore-15">Spiegazione dell'errore</a></h2>
+<p>Errore generico sugli azionamenti, In caso delle macchine Jet e Spin il problema sarà sull' azionamento utilizzato come Alimentatore :</p>
+<h2 id="possibili-cause-15"><a class="header" href="#possibili-cause-15">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Le cause sono molteplici e dipende dal messaggio di errore che compare sull'azionamento:<br><ol type="1" start="1"><li>Se l'alimentatore montato è nuovo, potrebbero esserci dei parametri di configurazione non corretti (Messaggi di errore F09, F21 sul display dell'alimentatore);</li><li>Alimentatore è guasto;</li></ol></div>
+<h2 id="possibili-soluzioni-15"><a class="header" href="#possibili-soluzioni-15">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Collegarsi all'alimentatore con il cavo COM e riseguire la procedura di <p><a href='configurazione_alimentatore_per_jet.html'>Configurazione Alimentatore per Jet</a></p></li><li style="text-align: left;">Controllare sul display dell'alimentatore il messaggio di errore ( F07, F09, F21) provare a riavviare la macchina e vedere se ricompare l'errore, valutare se è un problema legato a qualche motore;<br><br></li></ol></div>
+<h2 id="articoli-collegati-15"><a class="header" href="#articoli-collegati-15">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="asse"--><!--Label="dive"--><!--Label="motore"--><!--Label="azionamento"--><!--Label="key_pe0019"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0021-banco-ribaltabile-non-in-posizione"><a class="header" href="#pe0021-banco-ribaltabile-non-in-posizione">PE0021 Banco ribaltabile non in posizione</a></h1>
+<ul>
+<li><a href="pe0021_banco_ribaltabile_non_in_posizione.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0021_banco_ribaltabile_non_in_posizione.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0021_banco_ribaltabile_non_in_posizione.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0021_banco_ribaltabile_non_in_posizione.html#nb-ricordare-di-riabilitare-il-banco">NB: Ricordare di riabilitare il banco</a></li>
+<li><a href="pe0021_banco_ribaltabile_non_in_posizione.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0021 Banco ribaltabile non in posizione"-->
+<h2 id="spiegazione-dellerrore-16"><a class="header" href="#spiegazione-dellerrore-16">Spiegazione dell'errore</a></h2>
+<p>Il banco ribaltabile risulta fuori dalla posizione di parcheggio.</p><p><div><img src="attachments/PE0021_Banco_ribaltabile_non_in_posizione/IMG_0020.JPG" alt="IMG_0020.JPG"></div><hr><p><div><img src="attachments/PE0021_Banco_ribaltabile_non_in_posizione/IMG_0018.JPG" alt="IMG_0018.JPG"></div><hr>
+<h2 id="possibili-cause-16"><a class="header" href="#possibili-cause-16">Possibili cause</a></h2>
+<p>Le possibili cause di questo allarme sono molteplici, sia di tipo meccanico sia di tipo elettrico:</p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Per la macchina il banco non si trova nella posizione di parcheggio le motivazioni potrebbero essere:<br><ol type="1" start="1"><li>Il banco è inclinato e non tocca il fine corsa;</li><li>Il banco è in posizione di parcheggio ma non tocca il fine corsa;</li><li>Fine corsa del banco guasto;</li><li>Collegamento tra fine corsa banco e quadro elettrico guasto.</li><li>Il banco per qualche motivo meccanico ad esempio tubi rotti, olio mancante, pompa rotta non si riesce a riportare in parcheggio</li></ol></div>
+<h2 id="possibili-soluzioni-16"><a class="header" href="#possibili-soluzioni-16">Possibili soluzioni</a></h2>
+<p>!ATTENZIONE! Con l'allarme attivo la macchina non si può movimentare, quindi se la macchina non è in parcheggio saremo in una condizione di blocco, In Parametrix entrare nel primo "Lucchetto" premere il pulsante "Chiave inglese+Cacciavite"  e disabilitare il banco, (Se versione Parametrix vecchia entrare in KvIsoGui.exe entrare nell'area riservata con password:"esagv" e disabilitare l'optional "Banco")<div><img src="attachments/PE0021_Banco_ribaltabile_non_in_posizione/Immagine1.png" alt="Immagine1.png"></div><hr><p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Assicurandosi di aver la macchina in parcheggio eseguire le seguenti procedure:<br><ol type="1" start="1"><li>Usare l'apposito selettore posto sulla consolle per posizionare il banco in parcheggio;</li><li>Controllare se fisicamente il banco in posizione di parcheggio tocca o no il sensore, in caso non toccasse, controllare se il banco va in battuta sui bulloni in caso affermativo regolare il sensore in maniera tale da toccare il banco;</li><li>Aprire KvIsoGui.exe premere il pulsante "Menù" aprire "Monitor I/O" verificare, premendo il finecorsa se l'ingresso relativo ad esso funziona.(FC_SUPP_LOW   AT %IW4.13; * IW4.13 FC banco basso)<ol type="a" start="1"><li>Se l'ingresso non cambia di stato controllare con un Tester se il finecorsa funziona correttamente (per esempio se metto i puntalini sui morsetti NO quando premo il finecorsa devo chiudere il contatto)</li><li>Se il fine corsa funziona correttamente bisognerà controllare i collegamenti; seguire lo <p><a href='schema_elettrico_jet.html'>SCHEMA ELETTRICO JET</a></p></li></ol></li><li>Verificare il funzionamento della pompa e verificare che effettivamente l'impianto non sia guasto;</li></ol></div>
+<h2 id="nb-ricordare-di-riabilitare-il-banco"><a class="header" href="#nb-ricordare-di-riabilitare-il-banco">NB: Ricordare di riabilitare il banco</a></h2>
+<h2 id="articoli-collegati-16"><a class="header" href="#articoli-collegati-16">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="banco"--><!--Label="elettrico"--><!--Label="key_pe0021"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0023-muting-attivo"><a class="header" href="#pe0023-muting-attivo">PE0023 Muting attivo</a></h1>
+<ul>
+<li><a href="pe0023_muting_attivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0023_muting_attivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0023_muting_attivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0023_muting_attivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0023 Muting attivo"-->
+<h2 id="spiegazione-dellerrore-17"><a class="header" href="#spiegazione-dellerrore-17">Spiegazione dell'errore</a></h2>
+<p>L'allarme "Muting attivo" è generato automaticamente dal sistema ogni qualvolta viene tolta la chiave del selettore modale dall'apposita posizione sulla consolle. <br class="atl-forced-newline">Per ripristinare l'allarme è sufficiente inserire la chiave di sicurezza sulla consolle e armare la modalità lavoro.</p><p><div><img src="attachments/PE0023_Muting_attivo/IMG_0046.jpg" alt="IMG_0046.jpg"></div><hr><p><br></p>
+<h2 id="possibili-cause-17"><a class="header" href="#possibili-cause-17">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Chiave del selettore modale non inserita o posizionata su 0;</li><li>Collegamento elettrico guasto o errato;</li></ol></div>
+<h2 id="possibili-soluzioni-17"><a class="header" href="#possibili-soluzioni-17">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Girare la chiave o inserirla nell'apposita sede (il selettore deve essere su uno)<br><div><img src="attachments/PE0023_Muting_attivo/IMG_0045.jpg" alt="IMG_0045.jpg"></div><hr></li><li style="text-align: left;">Controllare che i collegamenti siano tutti corretti, controllare sullo <p><a href='schema_elettrico_jet.html'>SCHEMA ELETTRICO JET</a></p></li></ol></div>
+<h2 id="articoli-collegati-17"><a class="header" href="#articoli-collegati-17">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="consolle"--><!--Label="key_pe0023"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0027-mancanza-acqua-interna"><a class="header" href="#pe0027-mancanza-acqua-interna">PE0027 Mancanza acqua interna</a></h1>
+<ul>
+<li><a href="pe0027_mancanza_acqua_interna.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0027_mancanza_acqua_interna.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0027_mancanza_acqua_interna.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0027_mancanza_acqua_interna.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0027 Mancanza acqua interna"-->
+<h2 id="spiegazione-dellerrore-18"><a class="header" href="#spiegazione-dellerrore-18">Spiegazione dell'errore</a></h2>
+<p>Questo allarme è legato alla mancanza del segnale di ingresso del pressostato dell'acqua interna, durante un ciclo automatico.</p><p>I pressostati sono in questa posizione e sono di due tipi:</p><p style="text-align: center;"><img src="attachments/PE0027_Mancanza_acqua_interna/IMG_0002.JPG" alt="IMG_0002.JPG"></p><hr><p style="text-align: center;"><br></p><p style="text-align: center;"><img src="attachments/PE0027_Mancanza_acqua_interna/IMG_0005.JPG" alt="IMG_0005.JPG"><img src="attachments/PE0027_Mancanza_acqua_interna/IMG_0004.JPG" alt="IMG_0004.JPG"></p><hr><p style="text-align: center;"><br></p>
+<h2 id="possibili-cause-18"><a class="header" href="#possibili-cause-18">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Le possibilità sono molteplici:<br><ol type="1" start="1"><li>Mancanza effettiva dell'acqua;</li><li>Pressostato regolato per una pressione dell'acqua troppo alta;</li><li>Pressostato guasto;</li><li>Guasto tra collegamenti pressostato quadro.</li></ol></div>
+<h2 id="possibili-soluzioni-18"><a class="header" href="#possibili-soluzioni-18">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Controllare le motivazioni della mancanza d'acqua, se magari è solamente un calo di pressione.</li><li>Regolare il pressostato alla pressione desiderata, per la regolazione dei pressostati seguire la procedura di regolazione in base al tipo di pressostato <p><a href='attachments/PE0027_Mancanza_acqua_interna/Regolazione_pressostati_ita.pdf'>Regolazione_pressostati_ita.pdf</a></p></li><li>Sostituzione del pressostato con uno dello stesso tipo possibilmente;</li><li>Controllare seguendo lo <p><a href='schema_elettrico_jet.html'>SCHEMA ELETTRICO JET</a></p></li></ol></div>
+<h2 id="articoli-collegati-18"><a class="header" href="#articoli-collegati-18">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="pressostato"--><!--Label="elettrovalvola"--><!--Label="carro"--><!--Label="key_pe0027"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0028-asse-a-non-in-posizione-corretta"><a class="header" href="#pe0028-asse-a-non-in-posizione-corretta">PE0028 Asse A non in posizione corretta</a></h1>
+<ul>
+<li><a href="pe0028_asse_a_non_in_posizione_corretta.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0028_asse_a_non_in_posizione_corretta.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0028_asse_a_non_in_posizione_corretta.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0028_asse_a_non_in_posizione_corretta.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0028 Asse A non in posizione corretta"-->
+<h2 id="spiegazione-dellerrore-19"><a class="header" href="#spiegazione-dellerrore-19">Spiegazione dell'errore</a></h2>
+<p>Il sistema genera il messaggio "Asse A non in posizione corretta" ogni volta che viene premuto il pulsante "Parcheggio" o il pulsante "Cambio utensile manuale" e l'asse "A" non si trova in posizione corretta (Zero gradi).</p>
+<h2 id="possibili-cause-19"><a class="header" href="#possibili-cause-19">Possibili cause</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Si è premuto il pulsante P di parcheggio e l'asse A non si trova a 0.00° .<div><img src="attachments/PE0028_Asse_A_non_in_posizione_corretta/PulsanteP.png" alt="PulsanteP.png"></div><hr></li><li>Si è premuto il pulsante cambio utensile manuale e l'asse A non si trova a 0.00°<div><img src="attachments/PE0028_Asse_A_non_in_posizione_corretta/pulsante_cambio_utensile_manuale.png" alt="pulsante_cambio_utensile_manuale.png"></div><hr></li></ol></div>
+<h2 id="possibili-soluzioni-19"><a class="header" href="#possibili-soluzioni-19">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Movimentare asse A in posizione di 0.00° prima di premere i pulsanti di parcheggio o cambio utensile manuale<br><br></li></ol></div>
+<h2 id="articoli-collegati-19"><a class="header" href="#articoli-collegati-19">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="testa"--><!--Label="key_pe0028"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0029-impianto-di-lubrificazione-guasto"><a class="header" href="#pe0029-impianto-di-lubrificazione-guasto">PE0029 Impianto di lubrificazione guasto</a></h1>
+<ul>
+<li><a href="pe0029_impianto_di_lubrificazione_guasto.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0029_impianto_di_lubrificazione_guasto.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0029_impianto_di_lubrificazione_guasto.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0029_impianto_di_lubrificazione_guasto.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0029 Impianto di lubrificazione guasto"-->
+<h2 id="spiegazione-dellerrore-20"><a class="header" href="#spiegazione-dellerrore-20">Spiegazione dell'errore</a></h2>
+<p>L'allarme impianto lubrificazione guasto viene visualizzato quando nel circuito di distribuzione del grasso c'è un inceppamento e non riesce a fuoriuscire il grasso; verificare che sia presente il grasso nel serbatoio in quantità minima e successivamente analizzare il percorso di distribuzione. <br class="atl-forced-newline">L'allarme serbatoio grasso vuoto indica che è necessario riempire il serbatoio.</p><p>In allegato il manuale della polipump: <p><a href='attachments/PE0029_Impianto_di_lubrificazione_guasto/Polipump.pdf'>Polipump.pdf</a></p>
+<h2 id="possibili-cause-20"><a class="header" href="#possibili-cause-20">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Serbatoio del grasso vuoto;</li><li>Grasso inceppato in uscita dalla pompa;</li><li>Errore di cablaggio della pompa del grasso.</li></ol></div>
+<h2 id="possibili-soluzioni-20"><a class="header" href="#possibili-soluzioni-20">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Attraverso l'apposito punto di ricarica pompargli all'interno della pompa il Grasso corretto EP1;</li><li>Verificare che nel punto di uscita del grasso dalla pompa non ci siano ostruzioni o che il grasso sia vecchio e solido;</li><li>Verificare tramite l'utilizzo dello <p><a href='schema_elettrico_jet.html'>SCHEMA ELETTRICO JET</a></p></li></ol><p><br></p><p>NOTA: PER RESETTARE L'ERRORE, PREMERE PER QUALCHE SECONDO IL (PULSANTE START CICLO)+ (PULSANTE -) E RESETTARE ERRORI DIRETTAMENTE SULLA POMPA PREMENDO RESET</p></div>
+<h2 id="articoli-collegati-20"><a class="header" href="#articoli-collegati-20">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="grasso"--><!--Label="ponte"--><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0029"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0031-sovratemperatura-quadro"><a class="header" href="#pe0031-sovratemperatura-quadro">PE0031 Sovratemperatura quadro</a></h1>
+<ul>
+<li><a href="pe0031_sovratemperatura_quadro.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0031_sovratemperatura_quadro.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0031_sovratemperatura_quadro.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0031_sovratemperatura_quadro.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0031 Sovratemperatura quadro"-->
+<h2 id="spiegazione-dellerrore-21"><a class="header" href="#spiegazione-dellerrore-21">Spiegazione dell'errore</a></h2>
+<p>Questo errore compare quando il termostato all'interno del quadro elettrico rileva una temperatura più alta della temperatura massima impostata che solitamente è a 45° C</p>
+<h2 id="possibili-cause-21"><a class="header" href="#possibili-cause-21">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Condizionatore o ventola del quadro guasti;</li><li>Termostato regolato male;</li></ol></div>
+<h2 id="possibili-soluzioni-21"><a class="header" href="#possibili-soluzioni-21">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Controllare che la ventola di ricircolo funzioni correttamente</li><li>Controllare che il termostato relativo alla sovratemperatura all'interno del quadro sia a 45 gradi controllare sullo schema elettrico, inoltre se già impostato alla temperatura corretta controllare che apra e chiuda il contatto.</li></ol></div>
+<h2 id="articoli-collegati-21"><a class="header" href="#articoli-collegati-21">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="quadro"--><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0031"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0041-ch-0-programma-senza-m2-m30"><a class="header" href="#pe0041-ch-0-programma-senza-m2-m30">PE0041 CH 0 Programma senza M2-M30</a></h1>
+<!--Page="PE0041 CH 0 Programma senza M2-M30"--><p>Sintomo:</p><ul><li>utilizzando la funzione TEST ISO di compare il messaggio "<span style="color: rgb(22,85,111);">PE0041 CH 0 Programma senza M2-M30</span>" su qualsiasi file ISO</li><li>gli stessi file ISO si riescono ad eseguire normalmente</li></ul><p>Il problema è dovuto al file attachments/PE0041_CH_0_Programma_senza_M2-M30/fnzm30.srt su CNC del cliente.</p><p>Soluzione:</p><ul><li>scaricare il file attachments/PE0041_CH_0_Programma_senza_M2-M30/fnzm30.srt in allegato</li><li>copiare nella cartella C:\kvara\DiscoC\Iso della macchina del cliente</li><li>aprire KvIsoGui</li><li>Menù > Gestione Archivi</li><li>nello spazio di sinistra portasi nella cartella C:\kvara\DiscoC\Iso</li><li>cliccare sullo spazio di destra</li><li>cliccare "Cambia Unità" nei pulsanti in basso</li><li>selezionare il disco C del CNC</li><li>selezionare il file attachments/PE0041_CH_0_Programma_senza_M2-M30/fnzm30.srt nella cartella C:\kvara\DiscoC\Iso dello spazio di sinistra</li><li>cliccare "Copia" nei pulsanti in basso</li></ul><p><br></p><p>File attachments/PE0041_CH_0_Programma_senza_M2-M30/fnzm30.srt di seguito.</p><p><p><a href='attachments/PE0041_CH_0_Programma_senza_M2-M30/fnzm30.srt'>fnzm30.srt</a></p><!--Label="key_pe0041"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0065-termico-pompa-vuoto-attivo"><a class="header" href="#pe0065-termico-pompa-vuoto-attivo">PE0065 Termico pompa vuoto attivo</a></h1>
+<ul>
+<li><a href="pe0065_termico_pompa_vuoto_attivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0065_termico_pompa_vuoto_attivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0065_termico_pompa_vuoto_attivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0065_termico_pompa_vuoto_attivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0065 Termico pompa vuoto attivo"-->
+<h2 id="spiegazione-dellerrore-22"><a class="header" href="#spiegazione-dellerrore-22">Spiegazione dell'errore</a></h2>
+<p>Anomalia sull'impianto di sollevamento banco; L'interruttore magnetotermico relativo alla pompa del vuoto è scattato, esso offre una protezione sull'impianto sia ai cortocircuiti sia ai sovraccarichi. Per riarmare l'interruttore spostare il selettore a 0 e successivamente a 1;</p><p><br></p>
+<h2 id="possibili-cause-22"><a class="header" href="#possibili-cause-22">Possibili cause</a></h2>
+<p>Le cause possono essere suddivise in problemi Meccanici o Elettrici</p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Problemi meccanici:<br><ol type="1" start="1"><li>Motore pompa del vuoto bloccato, si può provare ad avviare la pompa del vuoto e vedere se effettivamente gira.</li><li>La vasca della pompa del vuoto è vuota</li></ol></div><p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Problemi elettrici:<br><ol type="1" start="1"><li>Cortocircuito tra fasi motore;</li><li>Mancanza di una fase;</li><li>Cortocircuito avvolgimenti del motore;</li><li>Interruttore Guasto o impostato la soglia di assorbimento su un valore errato</li></ol></div>
+<h2 id="possibili-soluzioni-22"><a class="header" href="#possibili-soluzioni-22">Possibili soluzioni</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>MECCANICHE<br><ol type="1" start="1"><li>Per prima cosa controllare che la ventolina di raffreddamento del motore giri libera, ovvero con un cacciavite per esempio provare a muovere la ventola, se risulta bloccata bisogna</li><li>riempire fino al livello di troppo pieno la vasca</li></ol></div><p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>ELETTRICHE → è consigliato l'ausilio di un elettricista o tecnico Donatoni presente sul posto<br><ol type="1" start="1"><li>Controllare che non ci sia continuità tra le varie fasi; scollegare il cavo dalla scatola elettrica della pompa, isolare i terminali e riarmare l'interruttore attivare la pompa dell'olio se scatta il problema potrebbe essere il cavo;</li><li>Misurare la tensione in ingresso con un multimetro e verificare la presenza di tutte le fasi, se manca ad esempio una fase controllare che siano tirati tutti i morsetti;</li><li>Se effettuando la prova al punto 1 l'interruttore non scatta, collegare il cavo alla pompa, se, avviando la pompa l'interruttore scatta il problema è la pompa quindi sarà da sostituire;</li><li>Se effettuate le prove precedenti il magneto termico continua a scattare il problema potrebbe essere il l'interruttore stesso, inoltre la soglia deve essere regolata a 4A</li></ol></div>
+<h2 id="articoli-collegati-22"><a class="header" href="#articoli-collegati-22">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="elettrico"--><!--Label="quadro"--><!--Label="key_pe0065"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0066-mancanza-aria"><a class="header" href="#pe0066-mancanza-aria">PE0066 Mancanza aria</a></h1>
+<ul>
+<li><a href="pe0066_mancanza_aria.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0066_mancanza_aria.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0066_mancanza_aria.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0066_mancanza_aria.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0066 Mancanza aria"-->
+<h2 id="spiegazione-dellerrore-23"><a class="header" href="#spiegazione-dellerrore-23">Spiegazione dell'errore</a></h2>
+<p>Questo allarme appare quando il pressostato presente sul gruppo aria generale della macchina rileva un importante calo di pressione</p>
+<h2 id="possibili-cause-23"><a class="header" href="#possibili-cause-23">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Pressione della linea non sufficiente;</li><li>Sensore non regolato correttamente;</li><li>Guasto del sensore;</li><li>Variazione improvvisa pressione in ingresso</li></ol></div>
+<h2 id="possibili-soluzioni-23"><a class="header" href="#possibili-soluzioni-23">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Controllare sul manometro del distributore d'aria generale della macchina se sono presenti almeno 6 Bar in caso negativo portare la pressione a sei bar tramite il regolatore e controllare che effetivamente arrivino almeno 6bar.</li><li>Se sul manometro si leggono 6Bar, provare dare mezzo giro in senso orario alla vite interna al sensore e controllare se sparisce l'allarme se no sparisce controllare tramite la mappa degli ingressi presente sul Sw quando il segnale risulta attivo</li><li>Nonostante le regolazioni del sensore l'allarme non scompare provare a scollegare il sensore e provare a collegare tra di loro i cavi del sensore, se l'allarme scompare, il sensore è guasto.</li><li>Se il messaggio di errore dura qualche secondo e poi scompare, probabilmente è dovuto ad un calo di pressione, tenere monitorato se cala la pressione spesso</li></ol></div>
+<h2 id="articoli-collegati-23"><a class="header" href="#articoli-collegati-23">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0066"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0067-vuoto-non-generato"><a class="header" href="#pe0067-vuoto-non-generato">PE0067 Vuoto non generato</a></h1>
+<ul>
+<li><a href="pe0067_vuoto_non_generato.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0067_vuoto_non_generato.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0067_vuoto_non_generato.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0067_vuoto_non_generato.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0067 Vuoto non generato"-->
+<h2 id="spiegazione-dellerrore-24"><a class="header" href="#spiegazione-dellerrore-24">Spiegazione dell'errore</a></h2>
+<p>Allarme che compare quando si effettua uno spostamento con ventose o da programma in automatico, o da pagina manuale.</p>
+<h2 id="possibili-cause-24"><a class="header" href="#possibili-cause-24">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Una o più zone delle ventose fuori dall'area del pezzo da sollevare</li><li>Sensore non regolato correttamente</li><li>Sensore guasto</li><li>Gomme ventose rovinate</li></ol></div>
+<h2 id="possibili-soluzioni-24"><a class="header" href="#possibili-soluzioni-24">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Disattivare le zone delle ventose che sono fuori dall'area del pezzo, o spostare la posizione della presa del pezzo alm</li><li>Girare il grano di regolazione del vacuostato di mezzo giro in senso antiorario.</li><li>Collegare tra di loro cavi del sensore e vedere se il messaggio di errore scompare;</li><li>Sostituire gomme ventose</li></ol></div>
+<h2 id="articoli-collegati-24"><a class="header" href="#articoli-collegati-24">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0067"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0069-ventose-non-in-parcheggio"><a class="header" href="#pe0069-ventose-non-in-parcheggio">PE0069 Ventose non in Parcheggio</a></h1>
+<ul>
+<li><a href="pe0069_ventose_non_in_parcheggio.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0069_ventose_non_in_parcheggio.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0069_ventose_non_in_parcheggio.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0069_ventose_non_in_parcheggio.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0069 Ventose non in Parcheggio"-->
+<h2 id="spiegazione-dellerrore-25"><a class="header" href="#spiegazione-dellerrore-25">Spiegazione dell'errore</a></h2>
+<p>Questo errore appare quando la macchina rileva che una o tutte e due le ventose non sono in stato di parcheggio.</p>
+<h2 id="possibili-cause-25"><a class="header" href="#possibili-cause-25">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Mancanza aria</li><li>Ventose abbassate</li><li>Sensori regolati non correttamente</li><li>sensori guasti</li></ol></div>
+<h2 id="possibili-soluzioni-25"><a class="header" href="#possibili-soluzioni-25">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Se abbinati all'errore PE0066 Mancanza aria verificare presenza aria nella macchina</li><li>Premere l'apposito pulsante per fare alzare le ventose</li><li>Aprendo le cover di acciaio che ci sono lateralmente ai braccetti delle ventose verificare che i sensori nella parte alta del pistone siano accesi quando le ventose sono su.</li></ol></div>
+<h2 id="articoli-collegati-25"><a class="header" href="#articoli-collegati-25">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0069"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0070-ventose-già-a-contatto-errore"><a class="header" href="#pe0070-ventose-già-a-contatto-errore">PE0070 Ventose già a contatto (errore)</a></h1>
+<ul>
+<li><a href="pe0070_ventose_gi%C3%A0_a_contatto_(errore).html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0070_ventose_gi%C3%A0_a_contatto_(errore).html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0070_ventose_gi%C3%A0_a_contatto_(errore).html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0070_ventose_gi%C3%A0_a_contatto_(errore).html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0070 Ventose già a contatto (errore)"-->
+<h2 id="spiegazione-dellerrore-26"><a class="header" href="#spiegazione-dellerrore-26">Spiegazione dell'errore</a></h2>
+<p>Questo errore compare generalmente le ventose sono appoggiate su un pezzo.</p>
+<h2 id="possibili-cause-26"><a class="header" href="#possibili-cause-26">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Ventose appoggiate sul pezzo;</li><li>Sensori non regolati correttamente;</li><li>Sensori guasti.</li></ol></div>
+<h2 id="possibili-soluzioni-26"><a class="header" href="#possibili-soluzioni-26">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Alzarsi con l'asse Z per staccarsi dal pezzo, Premere il pulsante per alzare le ventose</li><li>Fare scendere le ventose tramite l'apposito pulsante; aprire i carter d'acciaio di protezione presenti sui braccetti delle ventose e controllare che i led dei sensori bassi siano accesi</li></ol></div>
+<h2 id="articoli-collegati-26"><a class="header" href="#articoli-collegati-26">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0070"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pe0095-allarme-inverter"><a class="header" href="#pe0095-allarme-inverter">PE0095 Allarme Inverter</a></h1>
+<ul>
+<li><a href="pe0095_allarme_inverter.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pe0095_allarme_inverter.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pe0095_allarme_inverter.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pe0095_allarme_inverter.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PE0095 Allarme Inverter"-->
+<h2 id="spiegazione-dellerrore-27"><a class="header" href="#spiegazione-dellerrore-27">Spiegazione dell'errore</a></h2>
+<p>Questo messaggio appare quando il CN non rileva l'uscita dell'inverter indica l'assorbimento del motore .</p>
+<h2 id="possibili-cause-27"><a class="header" href="#possibili-cause-27">Possibili cause</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Sulle possibili cause <br><br><ol type="1" start="1"><li><!-- <placeholder>Use numbered lists to provide step-by-step help.</placeholder> --></li><li><!-- <placeholder>Copy and paste or drag and drop images to add them to this page.</placeholder> --></li></ol></div>
+<h2 id="possibili-soluzioni-27"><a class="header" href="#possibili-soluzioni-27">Possibili soluzioni</a></h2>
+<p><!-- <placeholder>Provide steps that the user can take to solve the problem. For example &quot;The level 7 printer will flash red when it is out of paper. Add paper to tray 1&quot;.</placeholder> --></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li><!-- <placeholder>Use numbered lists to provide step-by-step help.</placeholder> --></li><li><!-- <placeholder>Copy and paste or drag and drop images to add them to this page.</placeholder> --></li></ol></div>
+<h2 id="articoli-collegati-27"><a class="header" href="#articoli-collegati-27">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_pe0095"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pm0011-pistone-tastatore-fuori-posizione"><a class="header" href="#pm0011-pistone-tastatore-fuori-posizione">PM0011 Pistone tastatore fuori posizione</a></h1>
+<ul>
+<li><a href="pm0011_pistone_tastatore_fuori_posizione.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pm0011_pistone_tastatore_fuori_posizione.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pm0011_pistone_tastatore_fuori_posizione.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pm0011_pistone_tastatore_fuori_posizione.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PM0011 Pistone tastatore fuori posizione"-->
+<h2 id="spiegazione-dellerrore-28"><a class="header" href="#spiegazione-dellerrore-28">Spiegazione dell'errore</a></h2>
+<p>Viene inserito un blocco se il pistone del tastatore non risulta in posizione di parcheggio.</p><p>Tutti gli assi vengono messi in "hold"</p>
+<h2 id="possibili-cause-28"><a class="header" href="#possibili-cause-28">Possibili cause</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Posizione del pistone di poco oltre la soglia</li><li>Pistone del tastatore guasto</li><li>Errore di cablaggio</li></ol></div>
+<h2 id="possibili-soluzioni-28"><a class="header" href="#possibili-soluzioni-28">Possibili soluzioni</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><span>Verificare il valore IW40 relativo alla posizione del tastatore lastra.</span><br><ol type="1" start="1"><li>Se il valore letto è inferiore a 100 molto probabilmente il valore di soglia è troppo basso. In questo caso, nell'interfaccia KvIsoGui aprire EditorShared - Parametri -Tastatore Lastra e modificare il valore "Posizione di parcheggio" = 100</li><li>Se il valore letto è superiore a 100 verificare la reale posizione del tastatore e procedere con le verifiche elettriche in base allo schema elettrico della macchina.</li><li>Se non si riesce a trovare il difetto è possibile disabilitare il tastatore lastra per eliminare l'allarme (con tastatore lastra disabilitato il risultato della tastatura, se effettuata, è fisso a 30mm)</li></ol></div>
+<h2 id="articoli-collegati-28"><a class="header" href="#articoli-collegati-28">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="tastatore"--><!--Label="kb-troubleshooting-article"--><!--Label="key_pm0011"--><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-dtwain-e-fotocamera"><a class="header" href="#troubleshooting-dtwain-e-fotocamera">Troubleshooting DTwain e fotocamera</a></h1>
+<ul>
+<li><a href="troubleshooting_dtwain_e_fotocamera.html#altre-info">Altre info</a></li>
+</ul>
+<!--Page="Troubleshooting DTwain e fotocamera"--><p>In questa sezione vengono inseriti problemi e soluzioni incontrate con il software per la fotocamera.</p><p>
+<ul>
+<li><a href="./blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html">Blocco durante calibrazione AutomaticaManuale per dllNotFoundException</a></li>
+<li><a href="./blocco_durante_la_calibrazione_-_fase_selezione_rettangolo.html">Blocco durante la calibrazione - fase selezione rettangolo</a></li>
+<li><a href="./dtwain_non_si_avvia.html">DTwain non si avvia</a></li>
+<li><a href="./dtwain_vecchio_da_parametrix_appare_richiesta_nome.html">DTwain vecchio da parametrix appare richiesta nome</a></li>
+<li><a href="./foto_non_scattata.html">Foto non scattata</a></li>
+</ul>
+</p>
+<h2 id="altre-info"><a class="header" href="#altre-info">Altre info</a></h2>
+<p>Guide e altre informazioni sono reperibili al seguente link: <p><a href='dtwain.html'>DTWAIN</a></p><p><br></p><!--Label="dtwain"--><!--Label="key_dtw00"--><div style="break-before: page; page-break-before: always;"></div><h1 id="blocco-durante-calibrazione-automaticamanuale-per-dllnotfoundexception"><a class="header" href="#blocco-durante-calibrazione-automaticamanuale-per-dllnotfoundexception">Blocco durante calibrazione AutomaticaManuale per dllNotFoundException</a></h1>
+<ul>
+<li><a href="blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html#problema">Problema</a>
+<ul>
+<li><a href="blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html#soluzione">Soluzione</a></li>
+<li><a href="blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html#sezione-1">Sezione 1</a></li>
+<li><a href="blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html#sezione-2">Sezione 2</a></li>
+<li><a href="blocco_durante_calibrazione_automaticamanuale_per_dllnotfoundexception.html#sezione-3">Sezione 3</a></li>
+</ul>
+</li>
+</ul>
+<!--Page="Blocco durante calibrazione AutomaticaManuale per dllNotFoundException"-->
+<h1 id="problema"><a class="header" href="#problema">Problema</a></h1>
+<p>Quando si confermano le coordinate in modalità automatica, o i punti selezionati in modalità manuale la rotellina di calibrazione continua a girare e non arriva mai a conclusione.</p><p>Nelle versioni più recenti esce il messaggio "Errore irreversibile,l'applicazione verrà chiusa"</p><p><strong>Se si ispeziona il log si trova un messaggio del tipo dllNotFoundException.</strong></p>
+<h2 id="soluzione"><a class="header" href="#soluzione">Soluzione</a></h2>
+<h2 id="sezione-1"><a class="header" href="#sezione-1">Sezione 1</a></h2>
+<ol type="1" start="1"><li>chiudere DTwain utilizzando l'applicativo "KillDTwain.exe"</li><li>Disattivare la protezione real time di windows defender</li><li>Aprire il percorso" C:\DTwain\Utility"</li><li>Eseguire come amministratore il file "DTwainWinDefenderExclusion.exe"</li><li>Copiare sul Desktop il seguente file:  <p><a href='attachments/Blocco_durante_calibrazione_AutomaticaManuale_per_dllNotFoundException/Visual-C-Runtimes-All-in-One-Sep-2019_(1).zip'>Visual-C-Runtimes-All-in-One-Sep-2019_(1).zip</a></p></li><li>Estrarre il file (clic con il pulsante destro sul file, selezionare dal menù "Estrai tutto...", premere invio)</li><li>Aprire la cartella dei file estratti ed eseguire come amministratore il file "install_all.bat"</li><li>Riattivare la protezione real time di windows defender</li><li>Cancellare i file di installazione e svuotare il cestino</li></ol><p><br></p><p><strong>Se il problema persiste provare quanto segue:</strong></p>
+<h2 id="sezione-2"><a class="header" href="#sezione-2">Sezione 2</a></h2>
+<ol type="1" start="1"><li>Aprire il menù start di windows e entrare nella pagina impostazioni</li><li>aprire la pagina applicazioni (System→App and features)</li><li>Disinstallare tutte le voci del tipo "Microsoft Visual C++"</li><li>Riavviare il pc</li><li>ripetere quanto alla sezione 1 dal punto 7</li></ol><p><br></p><p><strong>Se il problema persiste provare quanto segue:</strong></p>
+<h2 id="sezione-3"><a class="header" href="#sezione-3">Sezione 3</a></h2>
+<ol type="1" start="1"><li>Ripetere la sezione 2 dal punto 1 al punto 3</li><li>Aprire il prompt dei comandi come amministratore (start→ Windows System→Command Prompt)</li><li>digitare DISM /online /cleanup-image /restorehealth</li><li>premere invio</li><li>attendere il completamento (può richiedere diversi minuti)</li><li>digitare sfc /scannow</li><li>premere invio</li><li>attendere il completamento (può richiedere diversi minuti)</li><li>Riavviare il pc</li><li>Ripetere i passaggi della sezione 1 a partire dal punto 7</li></ol><p><br></p><p><br></p><p><p><a href='attachments/Blocco_durante_calibrazione_AutomaticaManuale_per_dllNotFoundException/Visual-C-Runtimes-All-in-One-Sep-2019_(1).zip'>Visual-C-Runtimes-All-in-One-Sep-2019_(1).zip</a></p><!--Label="dtwain"--><!--Label="calibrazione"--><!--Label="fotocamera"--><!--Label="kb-troubleshooting-article"--><!--Label="key_dtw01"--><div style="break-before: page; page-break-before: always;"></div><h1 id="blocco-durante-la-calibrazione---fase-selezione-rettangolo"><a class="header" href="#blocco-durante-la-calibrazione---fase-selezione-rettangolo">Blocco durante la calibrazione - fase selezione rettangolo</a></h1>
+<ul>
+<li><a href="blocco_durante_la_calibrazione_-_fase_selezione_rettangolo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="blocco_durante_la_calibrazione_-_fase_selezione_rettangolo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="blocco_durante_la_calibrazione_-_fase_selezione_rettangolo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="blocco_durante_la_calibrazione_-_fase_selezione_rettangolo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Blocco durante la calibrazione - fase selezione rettangolo"-->
+<h2 id="spiegazione-dellerrore-29"><a class="header" href="#spiegazione-dellerrore-29">Spiegazione dell'errore</a></h2>
+<p>Dopo aver calcolato i parametri di calibrazione si blocca sul calcolo dell'immagine grande su cui impostare il rettangolo rosso di rilevamento dell'area.</p><p>Rimane in attesa per minuti senza dare errore o dà errori di memoria che non vengono descritti nel log.</p>
+<h2 id="possibili-cause-29"><a class="header" href="#possibili-cause-29">Possibili cause</a></h2>
+<p>In base alla posizione della macchinetta, all'area rilevata, alla posizione dei pattern e ad altre variabili il software deve calcolare un'immagine che mostri tutto ciò che è presente nella foto riportato sul piano elaborato. </p><p>Ad esempio se l'area rilevante dell'immagine è piccola rispetto all'imagine totale, la dimensione dell'immagine totale è troppo grande per la memoria del sistema, oppure se l'angolatura dell'immagine è troppo aperta si ha un'ingrandimento esagerato della parte lontana dalla fotocamera si ha sempre un problema di memoria dovuto ad un'immagine troppo grande.</p>
+<h2 id="possibili-soluzioni-29"><a class="header" href="#possibili-soluzioni-29">Possibili soluzioni</a></h2>
+<ol type="1" start="1"><li>Provare ad abbassare l'angolo dell'immagine in modo da chiudere l'angolo e diminuire le dimensioni dell'immagine da calcolare.<br>In alternativa:</li><li>Ridurre la scala per l'immagine elaborata:<ol type="a" start="1"><li>Aprire il file C:\DTwain\DTwain.dll.config</li><li>Cercare il parametro warpAllImageScale</li><li><p class="auto-cursor-target">Abbassare il valore a 0.25 o inferiore e riprovare (default 0.5)</p>
+<pre><code class="language-xml">      &lt;setting name="warpAllImageScale" serializeas="String"&gt;
+        &lt;value&gt;0.5&lt;/value&gt;
+      
+</code></pre>
+<p class="auto-cursor-target"><br></p></setting></li></ol></li></ol>
+<h2 id="articoli-collegati-29"><a class="header" href="#articoli-collegati-29">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="dtwain"--><!--Label="kb-troubleshooting-article"--><!--Label="key_dtw02"--><div style="break-before: page; page-break-before: always;"></div><h1 id="dtwain-non-si-avvia"><a class="header" href="#dtwain-non-si-avvia">DTwain non si avvia</a></h1>
+<ul>
+<li><a href="dtwain_non_si_avvia.html#errore-su-serializzazionedeserializzazione-xml">Errore su serializzazione/deserializzazione XML</a></li>
+</ul>
+<!--Page="DTwain non si avvia"--><p>DTwain potrebbe non avviarsi per diversi motivi.</p><p>La prima cosa da fare è controllare sempre l'apposito file di log, da cui provare a ricondursi alle seguenti possibile casistiche.</p>
+<h2 id="errore-su-serializzazionedeserializzazione-xml"><a class="header" href="#errore-su-serializzazionedeserializzazione-xml">Errore su serializzazione/deserializzazione XML</a></h2>
+<p>Potrebbero essersi corrotto uno o più file della cartella C:\DTwain\BinFiles.</p><p>Lanciare l'esegubile Kill_DTwain.exe.</p><p>Effettuare per prima cosa un backup dei file presenti in questa cartella in una cartella temporanea.</p><p>Esiste poi una specifica sotto cartella di backup gestita da DTwain con gli appositi file di backup:</p><ul><li>se si riesce ad individuare lo specifico file corrotto provare a ripristinare solo quello</li><li>se non si riesce ad individuare lo specifico file corrotto provare a ripristinarli tutti</li></ul><p>Lanciare nuovamente DTwain.exe:</p><ul><li>provare a scattare una foto, se tutto ok cancellare la cartella temporanea</li><li>se DTwain non si avvia o la foto non viene scattata correttamente ripristinare i file della cartella temporanea e cercare un'altra soluzione al problema </li></ul><p><br></p><!--Label="key_dtw03"--><div style="break-before: page; page-break-before: always;"></div><h1 id="dtwain-vecchio-da-parametrix-appare-richiesta-nome"><a class="header" href="#dtwain-vecchio-da-parametrix-appare-richiesta-nome">DTwain vecchio da parametrix appare richiesta nome</a></h1>
+<!--Page="DTwain vecchio da parametrix appare richiesta nome"--><p>Verificare il parametro di compensazione deltaZ.</p><p>Se parametrix chiama il Dtwain con uno spessore negativo appare la finestra per inserire nome e spessore foto </p><!--Label="key_dtw04"--><div style="break-before: page; page-break-before: always;"></div><h1 id="foto-non-scattata"><a class="header" href="#foto-non-scattata">Foto non scattata</a></h1>
+<ul>
+<li><a href="foto_non_scattata.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="foto_non_scattata.html#possibili-cause">Possibili cause</a></li>
+<li><a href="foto_non_scattata.html#strumenti-utili">Strumenti utili:</a></li>
+<li><a href="foto_non_scattata.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="foto_non_scattata.html#ripristino-salvataggi">RIPRISTINO SALVATAGGI</a></li>
+<li><a href="foto_non_scattata.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Foto non scattata"-->
+<h2 id="spiegazione-dellerrore-30"><a class="header" href="#spiegazione-dellerrore-30">Spiegazione dell'errore</a></h2>
+<p>Il software smbra partire ma la foto non viene scattata</p>
+<h2 id="possibili-cause-30"><a class="header" href="#possibili-cause-30">Possibili cause</a></h2>
+<p>Possono essere hardware o software. Seguire le procedure descritte sotto per identificare la causa e la relativa soluzione.</p>
+<h2 id="strumenti-utili"><a class="header" href="#strumenti-utili">Strumenti utili:</a></h2>
+<ul><li>KillDTwain.exe : reperibile in C:\DTwain\ chiude tutte le istanze del programma rimaste appese,comprese istanze del server.</li><li>StartDTwainServer.bat: reperibile in C:\DTwain\Utility\, apre una nuova istanza del server DTwain.</li><li>DTwainWinDefenderExclusion.exe: reperibile in C:\DTwain\Utility\, aggiunge i processi di DTwain alle esclusioni di Windows Defender.</li><li>OpenPort.Bat C:\DTwain\Utility\, aggiunge la regola per permettere le connessioni di DTwain alle eccezioni di Windows Firewall</li></ul>
+<h2 id="possibili-soluzioni-30"><a class="header" href="#possibili-soluzioni-30">Possibili soluzioni</a></h2>
+<ol type="1" start="1"><li>Individuare il programma problematico: DTwain o Parametrix? Aprendo DTwain da solo la foto viene scattata? Se sì allora il problema è Parametrix, altrimenti il problema è effettivamente DTwain.</li><li>Controllare lo stato dei collegamenti: la fotocamera risulta collegata al PC (guardare in Computer)? La fotocamera è visibile al serverino? Risulta collegata? Se no chiedere di premere emergenza e riabilitare i comandi. Adesso la fotocamera risulta visibile? Se no il problema è di tipo hardware(Fotocamera o serverino rotti) o di collegamento(rete macchina /cavo).</li><li>Se tutto il reparto hardware risulta funzionante ispezionare la parte software: per prima cosa aprire il file di log del giorno in cui il problema si è presentato al percorso C:\DTwain\logs\. Ogni riga del file di log rappresenta un messaggio scritto dal programma, ed è così strutturata:<br><br>Tipologia Messaggio | Data Ora | Funzione che ha scritto il messaggio | Messaggio<br><br>Cercare i messaggi di tipologia ERROR, leggere il messaggio per cercare di capire l'errore.</li><li>Alcuni messaggi sono generati dalla libreria software canon, e riportano un messaggio del tipo:  "Errore generato dall'SDK [...informazioni aggiuntive...]: numero errore"; in tal caso l'errore va convertito in notazione esadecimale e confrontato con l'elenco errori reperibile al link seguente:  <a href="http://192.168.1.14:8090/display/SVIL/Errori+SDK+Canon">Errori SDK Canon</a> . In questa maniera è possibile identificare in maniera precisa l'errore. Gli errori più comuni e le relative procedure di risoluzione sono riportati sotto.<br><br></li></ol>
+<h3 id="problemi-comuni-foto-non-scattata"><a class="header" href="#problemi-comuni-foto-non-scattata">PROBLEMI COMUNI FOTO NON SCATTATA:</a></h3>
+<p><strong>Quanto descritto in seguito va fatto sempre DOPO aver seguito il procedimento standard di risoluzione dei problemi.</strong></p><p>Di seguito alcuni problemi noti e relative procedure di risoluzione:</p><ul><li><strong>EDS_ERR_INVALID_HANDLE         </strong>0x00000061L   (<strong>97</strong>) : puntatore alla fotocamera non valido. Normalmente è sufficiente chiudere DTwain, premere emergenza, riabilitare i comandi. In caso di configurazione Pc Ufficio-Pc Macchina sul pc macchina occorre usare il programma KillDTwain.exe , e una volta riabilitati i comandi far ripartire il server usando il programma StartDTwainServer.bat reperibile in C:\DTwain\Utility\ facendolo partire come amministratore. Se l'errore persiste potrebbe essere necessario riavviare il Pc.</li><li><strong>EDS_ERR_DEVICE_BUSY               </strong> 0x00000081L  (<strong>129</strong>): il dispositivo è occupato da un'altra applicazione. Potrebbe esserci un'altro DTwain aperto,o un altro programma (tipo programmi della Canon installati per fare regolazioni delle impostazioni o aggiunti dal cliente). Provare a usare KillDTwain e chiudere eventuali applicazioni che usano la macchina fotografica. Provare un paio di scatti, se il problema persiste premere emergenza e riabilitare i comandi. Se persiste comunque potrebbe essere necessario riavviare il PC.</li><li><strong>EDS_ERR_COMM_PORT_IS_IN_USE   </strong> 0x000000C0L   (<strong>192</strong>): vedi precedente.</li><li><strong>EDS_ERR_TAKE_PICTURE_AF_NG       </strong> 0x00008D01L  (<strong>36097</strong>): l'autofocus è rimasto impostato su automatico e sforza sulla ghiera andando in errore. Impostare fisicamente l'autofocus a manuale sulla fotocamera.</li><li><p class="auto-cursor-target"><strong>Errore Timeout Download Fotocamera:</strong> Per prima cosa controllare che lo sportello della fotocamera si apra normalmente, con lo sportello chiuso la fotocamera rileva un ambiente buio e impiega molti secondi per scattare la foto. Se necessario regolare l'aria dello sportello perchè si apra più velocemente o allungare il tempo di attesa dello sportello in impostazioni>impostazioni fotocamera>Attesa sportello. Di default il parametro è impostato a 2000 millisecondi, se necessario aumentare.<br>In caso di luce ambientale particolarmente scarsa o di lastra scura è possibile che il tempo di attesa per ricevere la foto impostato di default(8 secondi) non sia sufficiente. In tal caso le opzioni sono diverse: se l'errore avviene in fase di installazione e si sa che la situazione ambientale non è un caso isolato ma è la situazione standard di lavoro del cliente è possibile variare i parametri di scatto della fotocamera tramite l'apposita procedura per compensare aumentando l'ISO e/o aumentando la compensazione dell'esposizione per ridurre i tempi di scatto. Se il caso invece è isolato (lastra scura, lampada rotta) e le impostazioni standard vanno bene per il 90% dei casi si può allungare il tempo di attesa: Aprire il file C:\DTwain\DTwainLib.dll.config con un editor di testo (Notepad), cercare il seguente blocco di righe:</p>
+<pre><code>&lt;setting name="downloadPhotoTimeOut" serializeas="String"&gt;
+&lt;value&gt;8000&lt;/value&gt;
+
+</code></pre>
+<p><span style="letter-spacing: 0.0px;color:var(--ds-text,#333);">cambiare il valore 8000 (tempo di attesa in millisecondi) in un valore superiore. Aumentare di 1000, salvare,chiudere il file, provare ad aprire DTwain e scattare la foto. Una volta trovato un valore per cui lo scatto avviene senza problemi aumentare ulteriormente di qualche secondo il valore per fornire un margine di sicurezza maggiore.</span></p></setting></li></ul>
+<h2 id="ripristino-salvataggi"><a class="header" href="#ripristino-salvataggi">RIPRISTINO SALVATAGGI</a></h2>
+<p>In alcuni casi potrebbe essere utile ripristinare DTwain allo stato in cui era alla fine dell'ultima calibrazione eseguita con successo. Per fare ciò è sufficiente scompattare il file backup.zip reperibile all'interno della cartella C:\DTwain\BinFiles,e copiare i due file che ci sono all'interno nella cartella C:\DTwain\BinFiles, avendo cura prima di cancellare(o per sicurezza spostare in una diversa posizione) tutti i file presenti in tale cartella, eccezione fatta per il file di backup.</p><p>In questo modo al successivo avvio il programma sarà nello stato in cui era al termine dell'ultima calibrazione eseguita.</p>
+<h2 id="articoli-collegati-30"><a class="header" href="#articoli-collegati-30">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="dtwain"--><!--Label="fotocamera"--><!--Label="kb-troubleshooting-article"--><!--Label="key_dtw05"--><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-macchine-vecchie"><a class="header" href="#troubleshooting-macchine-vecchie">Troubleshooting macchine vecchie</a></h1>
+<!--Page="Troubleshooting macchine vecchie"--><p>I questa sezione inseriamo il troubleshooting di macchine non più in produzione</p><p><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_trouble_old_machines"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pm0033-ripristino-pressioni"><a class="header" href="#pm0033-ripristino-pressioni">PM0033 Ripristino pressioni</a></h1>
+<ul>
+<li><a href="pm0033_ripristino_pressioni.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="pm0033_ripristino_pressioni.html#possibili-cause">Possibili cause</a></li>
+<li><a href="pm0033_ripristino_pressioni.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="pm0033_ripristino_pressioni.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="PM0033 Ripristino pressioni"-->
+<h2 id="spiegazione-dellerrore-31"><a class="header" href="#spiegazione-dellerrore-31">Spiegazione dell'errore</a></h2>
+<p>The MOVE1 system is actioned with a piston.</p><p>To work it has a pressure switch to understand le pressure level in the piston.</p>
+<h2 id="possibili-cause-31"><a class="header" href="#possibili-cause-31">Possibili cause</a></h2>
+<p>Il sensore non rileva sufficiente pressione nella camera inferiore del cilindro. Potrebbe essere dovuto a perdite o a problemi con il sensore o con la valvola</p><p><img src="attachments/PM0033_Ripristino_pressioni/image2020-7-15_14-14-44.png" alt="image2020-7-15_14-14-44.png"></p>
+<h2 id="possibili-soluzioni-31"><a class="header" href="#possibili-soluzioni-31">Possibili soluzioni</a></h2>
+<p>With 3 / 4 bars it must be closed (input IW4.4).</p><ol type="1" start="1"><li> Try to move up and down the vacuum system.</li><li>If doesn’t work try to restart the machine.</li><li>If doesn’t work remove the carter and try to use the move system with the hardware command directly on the valve.</li></ol>
+<h2 id="articoli-collegati-31"><a class="header" href="#articoli-collegati-31">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="move1"--><!--Label="kb-troubleshooting-article"--><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-meccanici"><a class="header" href="#troubleshooting-meccanici">Troubleshooting meccanici</a></h1>
+<!--Page="Troubleshooting meccanici"--><p>
+<ul>
+<li><a href="./tool+_posizione_parcheggio.html">Tool+ Posizione parcheggio</a></li>
+<li><a href="./parallelismo_disco_al_variare_di_a.html">Parallelismo disco al variare di A</a></li>
+</ul>
+</p><!--Label="key_trouble_mechanics"--><div style="break-before: page; page-break-before: always;"></div><h1 id="tool-posizione-parcheggio"><a class="header" href="#tool-posizione-parcheggio">Tool+ Posizione parcheggio</a></h1>
+<!--Page="Tool+ Posizione parcheggio"--><p>Il tool+ non torna sempre nella posizione di parcheggio a causa di un disallineamento fra pistone e guide lineari.</p><p>Procedura di regolazione temporanea:</p><ol type="1" start="1"><li>Put the tool+ in the park position</li><li>Unscrew a bit the 3 bolts in the image</li><li>Make a movement down and up with the TOOL+</li><li>Fix he bolts.</li></ol><p><img src="attachments/Tool+_Posizione_parcheggio/2021_05_03_10_13_58_251002338.iam.dwf_Autodesk_Design_Review.png" alt="2021_05_03_10_13_58_251002338.iam.dwf_Autodesk_Design_Review.png"></p><p><img src="attachments/Tool+_Posizione_parcheggio/Immagine.png" alt="Immagine.png"></p><!--Label="key_trouble_parking_position"--><div style="break-before: page; page-break-before: always;"></div><h1 id="parallelismo-disco-al-variare-di-a"><a class="header" href="#parallelismo-disco-al-variare-di-a">Parallelismo disco al variare di A</a></h1>
+<ul>
+<li><a href="parallelismo_disco_al_variare_di_a.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="parallelismo_disco_al_variare_di_a.html#possibili-cause">Possibili cause</a></li>
+<li><a href="parallelismo_disco_al_variare_di_a.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="parallelismo_disco_al_variare_di_a.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Parallelismo disco al variare di A"-->
+<h2 id="spiegazione-dellerrore-32"><a class="header" href="#spiegazione-dellerrore-32">Spiegazione dell'errore</a></h2>
+<p>Inclinando l'asse A si perde il parallelismo del disco con l'asse C</p>
+<h2 id="possibili-cause-32"><a class="header" href="#possibili-cause-32">Possibili cause</a></h2>
+<ul><li>Errato allineamento verticale del disco</li><li>errore sulla lavorazione meccanica fra piano asse C e asse A</li></ul>
+<h2 id="possibili-soluzioni-32"><a class="header" href="#possibili-soluzioni-32">Possibili soluzioni</a></h2>
+<p>To understand if the problem is due to a wrong mechanical regulation please check the vertical alignment of the motor with A=90°.</p><p> </p><p>Below some image to show what I mean: bubble level on left/right side of the motor shaft.</p><p> <img src="attachments/Parallelismo_disco_al_variare_di_A/image2021-1-28_12-11-14.png" alt="image2021-1-28_12-11-14.png"><img src="attachments/Parallelismo_disco_al_variare_di_A/image2021-1-28_12-11-33.png" alt="image2021-1-28_12-11-33.png"></p><p> </p><p>If this regulation is good we can try to solve the issue with a software compensation:</p><ol type="1" start="1"><li>With A =45° check the alignment to the X axis and rotate C until the error is under the tolerance (save this value (CompC))</li><li>In KvISOGui software: Menu -Editor shared à Parameters of axis C<br><img src="attachments/Parallelismo_disco_al_variare_di_A/parametri_asse_C.jpg" alt="parametri_asse_C.jpg"></li><li>In ZoneDataCompensation – [1]<br><img src="attachments/Parallelismo_disco_al_variare_di_A/image2021-1-28_12-13-8.png" alt="image2021-1-28_12-13-8.png"></li></ol><p style="margin-left: 60.0px;">Fill the value like in the image.</p><p style="margin-left: 60.0px;">In measure 1 compensation write the value that you save before (compC)</p><p style="margin-left: 60.0px;">In measure 2 compensation write the double (CompC*2)</p><p style="margin-left: 30.0px;">4. Restart the machine</p><p> </p>
+<h2 id="articoli-collegati-32"><a class="header" href="#articoli-collegati-32">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="kb-troubleshooting-article"--><!--Label="key_trouble_parallel_disk"--><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-parametrix"><a class="header" href="#troubleshooting-parametrix">Troubleshooting Parametrix</a></h1>
+<ul>
+<li><a href="troubleshooting_parametrix.html#altre-info">Altre info</a></li>
+</ul>
+<!--Page="Troubleshooting Parametrix"--><p>Nel presente capitolo vengono inseriti dei commenti e trucchi su problematiche incontrate con il software parametrix</p><p>
+<ul>
+<li><a href="./blocco_allavvio_non_ripetitivo.html">Blocco allavvio non ripetitivo</a></li>
+<li><a href="./blocco_allavvio_ripetitivo.html">Blocco allavvio ripetitivo</a></li>
+<li><a href="./errori_database_e_servizio_postgresql.html">Errori database e servizio postgresql</a>
+<ul>
+<li><a href="./postgresql_-_data_e_ora.html">PostgreSQL - Data e Ora</a></li>
+<li><a href="./postgresql_-_utente_del_servizio_postgresql.html">PostgreSQL - Utente del servizio postgresql</a></li>
+<li><a href="./postgresql_-_servizio_postgresql_non_parte.html">PostgreSQL - Servizio PostgreSQL non parte</a></li>
+<li><a href="./postgresql_-_installazione__.dll_mancante.html">PostgreSQL - installazione  .dll mancante</a></li>
+<li><a href="./postgresql_-_installazione_avvio_di_parametrix_su_versione_psql_diversa_da_quella_del_setup.html">PostgreSQL - installazione Avvio di Parametrix su versione PSQL diversa da quella del setup</a></li>
+<li><a href="./postgresql_-_servizio_postgresql_non_avviato.html">PostgreSQL - Servizio postgresql non avviato</a></li>
+<li><a href="./postgresql_-_errori_in_fase_di_installazione_su_windows_xp.html">PostgreSQL - Errori in fase di installazione su Windows XP</a></li>
+<li><a href="./postgresql_-_servizio_postgresql_si_avvia_e_si_arresta_subito.html">PostgreSQL - Servizio postgresql si avvia e si arresta subito</a></li>
+</ul>
+</li>
+<li><a href="./parametrix_non_si_avvia_senza_dare_errori.html">Parametrix non si avvia senza dare errori</a>
+<ul>
+<li><a href="./installazione_postgresql.html">Installazione PostgreSQL</a></li>
+</ul>
+</li>
+<li><a href="./parametrix_viene_chiuso_dal_sistema_operativo.html">Parametrix viene chiuso dal sistema operativo</a></li>
+<li><a href="./problemi_di_visualizzazione_con_impostazioni_schermo_non_standard.html">Problemi di visualizzazione con impostazioni schermo non standard</a></li>
+<li><a href="./problemi_dxf.html">Problemi DXF</a></li>
+<li><a href="./pulsante_conferma_foto_non_funziona.html">Pulsante Conferma Foto non funziona</a></li>
+<li><a href="./twin_invio_immagini_a_monitor_di_scarico_(alfabeti_diversi).html">TWIN Invio immagini a Monitor di scarico (alfabeti diversi)</a></li>
+<li><a href="./problemi_di_visualizzazione_anteprime_pezzi_o_foto_nera.html">Problemi di visualizzazione anteprime pezzi o foto nera</a></li>
+</ul>
+</p>
+<h2 id="altre-info-1"><a class="header" href="#altre-info-1">Altre info</a></h2>
+<p>Guide e altre informazioni sono reperibili al link: <p><a href='parametrix.html'>PARAMETRIX</a></p><!--Label="parametrix"--><!--Label="key_prx_00"--><div style="break-before: page; page-break-before: always;"></div><h1 id="blocco-allavvio-non-ripetitivo"><a class="header" href="#blocco-allavvio-non-ripetitivo">Blocco allavvio non ripetitivo</a></h1>
+<ul>
+<li><a href="blocco_allavvio_non_ripetitivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="blocco_allavvio_non_ripetitivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="blocco_allavvio_non_ripetitivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="blocco_allavvio_non_ripetitivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Blocco allavvio non ripetitivo"-->
+<h2 id="spiegazione-dellerrore-33"><a class="header" href="#spiegazione-dellerrore-33">Spiegazione dell'errore</a></h2>
+<p>All'avvio del software si blocca con l'animazione "Dv" senza dare errori.</p><p>Il problema NON è ripetitivo.</p><p>Nel log non ci sono informazioni.</p>
+<h2 id="possibili-cause-33"><a class="header" href="#possibili-cause-33">Possibili cause</a></h2>
+<p>Trovato con windows XP e la versione 4.8. Si pensa dovuto all'avvio di task paralleli mal supportati dal sistema operativo.</p>
+<h2 id="possibili-soluzioni-33"><a class="header" href="#possibili-soluzioni-33">Possibili soluzioni</a></h2>
+<p>Disattivare l'avvio dell'animazione e informare il cliente che non ci sarà più l'animazione ad evidenziare l'attesa. </p><p>Ad esempio, dopo il doppio click sembra che il software non sia attivo ma in realtà sta caricando. Attendere 30/40 secondi che appaia la pagina manuale.</p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Aprire il file C:\parametrix\Giocut.exe.config</li><li>Modificare  una delle righe finali mettendo false al posto di true<br>  <add key="ProgressStartup" value="<span class=" legacy-color-text-yellow3"><strong><span class="legacy-color-text-default">f</span><span class="legacy-color-text-default">alse</span></strong>" /></add></li></ol></div>
+<h2 id="articoli-collegati-33"><a class="header" href="#articoli-collegati-33">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="parametrix"--><!--Label="kb-troubleshooting-article"--><!--Label="key_prx_01"--><div style="break-before: page; page-break-before: always;"></div><h1 id="blocco-allavvio-ripetitivo"><a class="header" href="#blocco-allavvio-ripetitivo">Blocco allavvio ripetitivo</a></h1>
+<ul>
+<li><a href="blocco_allavvio_ripetitivo.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="blocco_allavvio_ripetitivo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="blocco_allavvio_ripetitivo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="blocco_allavvio_ripetitivo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Blocco allavvio ripetitivo"-->
+<h2 id="spiegazione-dellerrore-34"><a class="header" href="#spiegazione-dellerrore-34">Spiegazione dell'errore</a></h2>
+<p>All'avvio parametrix si blocca senza dare errori.</p><p>Problema ripetitivo su CN vecchio</p>
+<h2 id="possibili-cause-34"><a class="header" href="#possibili-cause-34">Possibili cause</a></h2>
+<p>Dovuto alla mancanza di alcune variabili sulla defcn come ad esempio il nome utensile.</p><p>File AlrData.alm in C:\Parametrix\ di grosse dimensioni. Nel log, dopo minuti di attesa, segna errore per il collegamento con la dll esa</p>
+<h2 id="possibili-soluzioni-34"><a class="header" href="#possibili-soluzioni-34">Possibili soluzioni</a></h2>
+<p>Effettuare l'aggiornamento del software bordo macchina o in alternativa togliere la comunicazione con il CN (non basta togliere la lettura utensile da CN).</p><p>Cancellare il file AlrData.alm</p>
+<h2 id="articoli-collegati-34"><a class="header" href="#articoli-collegati-34">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="parametrix"--><!--Label="kb-troubleshooting-article"--><!--Label="key_prx_02"--><div style="break-before: page; page-break-before: always;"></div><h1 id="errori-database-e-servizio-postgresql"><a class="header" href="#errori-database-e-servizio-postgresql">Errori database e servizio postgresql</a></h1>
+<!--Page="Errori database e servizio postgresql"--><p>Parametrix risconta errori in fase di comunicazione con il DB. </p><p>Di seguito alcuni possibili scenari e le relative soluzioni proposte.</p><p><br></p><p><br></p><p><br><br></p><p><br></p><p><br></p><p><br></p><!--Label="key_psql_00"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---data-e-ora"><a class="header" href="#postgresql---data-e-ora">PostgreSQL - Data e Ora</a></h1>
+<!--Page="PostgreSQL - Data e Ora"--><p>Controllare che data e ora siano giuste. Capita che su PC vecchi con la batteria del BIOS scarica si perdano le impostazioni di data e ora. Poichè postgresql esegue dei controlli di integrità sui dati che legge/scrive, se si provano da inserire dati con date nel passato segnala errori.</p><p>Sistemare quindi data e ora affinchè siano corretti.</p><!--Label="key_psql_01"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---utente-del-servizio-postgresql"><a class="header" href="#postgresql---utente-del-servizio-postgresql">PostgreSQL - Utente del servizio postgresql</a></h1>
+<!--Page="PostgreSQL - Utente del servizio postgresql"--><p>Il servizio di postgresql deve poter interagire con il Desktop. Spesso gli utenti di rete non possono eseguire tale operazione. Bisogna impostare il servizio postgresql affinchè sia in grado di interagire con il Desktop.</p><p><strong>Soluzione:</strong></p><p>1 - Aprire l'applicazione per la gestione dei Servizi</p><div><img src="attachments/PostgreSQL_-_Utente_del_servizio_postgresql/Postgresql01.png" alt="Postgresql01.png" width="507"></div><p>2 - Cliccare con il tasto destro su postgresql e selezionare Proprietà</p><div><img src="attachments/PostgreSQL_-_Utente_del_servizio_postgresql/Postgresql02.png" alt="Postgresql02.png" width="508"></div><p>3 - Cliccare su Connessione</p><div><img src="attachments/PostgreSQL_-_Utente_del_servizio_postgresql/Postgresql03.png" alt="Postgresql03.png" width="508"></div><p>4 - Impostare "Account di sistema locale" e spuntare il flag "Consenti al servizio di interagire col desktop"</p><div><img src="attachments/PostgreSQL_-_Utente_del_servizio_postgresql/Postgresql04.png" alt="Postgresql04.png" width="508"></div><!--Label="key_psql_02"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---servizio-postgresql-non-parte"><a class="header" href="#postgresql---servizio-postgresql-non-parte">PostgreSQL - Servizio PostgreSQL non parte</a></h1>
+<!--Page="PostgreSQL - Servizio PostgreSQL non parte"--><p><strong>Problema</strong>: problemi post installazione di postgresql.</p><p><strong>Sintomi</strong>:</p><ul><li><p>nella cartella C:\Program Files (x86)\PostgreSQL\9.6\data non ci sono file</p></li><li><p>anche forzando l’avvio del servizio postgresql con i file bat ci viene restituito un errore di accesso negato</p></li><li><p>il servizio non è stato registrato</p></li></ul><p>Articoli correlati:</p><ul><li><p><a href="https://webkul.com/blog/postgresql-windows-installation-problem-running-post-install-step-installation-may-not-complete-correctly/">https://webkul.com/blog/postgresql-windows-installation-problem-running-post-install-step-installation-may-not-complete-correctly/</a></p></li><li><p><a href="https://help.statlook.com/knowledge-base/problem-running-post-install-step-postgresql-installation">https://help.statlook.com/knowledge-base/problem-running-post-install-step-postgresql-installation</a></p></li></ul><p><strong>Soluzione:</strong></p><ol start="1" type="1"><li><p>Controllare separatore decimale punto (".") e separatore virgola (",")</p></li><li><p>Controllare impostazioni di cultura: se diverse da quelle di default (English - United States) impostarle come tali e ricambiarle alla fine della procedura</p></li><li><p>Creare un utente locale “postgres” psw: admin con privilegi di amministratore</p></li><li><p>Disinstallare postgres</p></li><li><p>Scaricare l’installer manuale della versione 9.6, si trova sul server o nelle dipendenze del setup</p></li><li><p>Copiarlo in C:\</p></li><li><p>Lanciare il cmd.exe e digitare <strong>runas /user:postgres cmd.exe</strong></p></li><li><p>Nella console nuova digitare <strong>cd\</strong></p></li><li><p><strong>postgresql-9.6.5-windows.exe </strong>, il nome dell’exe che avete copiato prima</p></li><li><p>Dobbiamo creare manualmente l’utente donatoni, sempre nella console dell’utente postgres (<strong>runas /user:postgres cmd.exe</strong>), e sempre manualmente assegnare i diritti di superuser</p></li><li><p><strong>cd C:\Program Files (x86)\PostgreSQL\9.6\bin</strong></p></li><li><p><strong>psql -c "CREATE USER donatoni WITH PASSWORD 'Parametr1x2017';"</strong></p></li><li><p><strong>psql -c "ALTER USER donatoni WITH SUPERUSER";</strong></p></li></ol><p></p><!--Label="key_psql_03"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---installazione--dll-mancante"><a class="header" href="#postgresql---installazione--dll-mancante">PostgreSQL - installazione  .dll mancante</a></h1>
+<!--Page="PostgreSQL - installazione  .dll mancante"--><p><strong>Problema</strong>: installando postgresql compare il seguente errore: Unknown Error while running C:\Users\user\AppData\Local\Temp\postgresql_installerxxxxxxx\<strong>getlocales.exe</strong></p><p><strong>Soluzione</strong>:</p><ol start="1" type="1"><li><p>Controllare se le librerie sono già presenti: se ci sono librerie duplicate, disinstallarle tutte manualmente</p></li><li><p>Installare tutte le librerie Visual-C-Runtimes. Il file zip chiamato Visual-C-Runtimes-All-in-One-Sep-2019 (1).zip si trova nella cartella \\fileserver01\discoutec\UfficioTecnicoProgrammazione\Programmi Esterni\Installer Vari</p></li><li><p>Verificare che nelle cartelle C:\Windows\System32\ e C:\Windows\SysWOW64\ sia presente la dll <strong>msvcr120.dll</strong></p><ol start="1" type="a"><li><p><strong>Se la dll è presente sostituirla con quelle presente sul server: \\FILESERVER01\DiscoUTec\UfficioTecnicoProgrammazione\Programmi Esterni\Files Programmi\DLL Postgresql</strong></p></li></ol></li><li><p>Rilanciare postgres da riga di comando togliendo l’installazione automatica dei runtime (--install_runtimes 0):<br><strong>postgresql.exe --mode unattended --superaccount donatoni --superpassword Parametr1x2017 --serverport 5432 --disable-stackbuilder yes --install_runtimes 0</strong></p></li></ol><!--Label="key_t_param_psql_04"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---installazione-avvio-di-parametrix-su-versione-psql-diversa-da-quella-del-setup"><a class="header" href="#postgresql---installazione-avvio-di-parametrix-su-versione-psql-diversa-da-quella-del-setup">PostgreSQL - installazione Avvio di Parametrix su versione PSQL diversa da quella del setup</a></h1>
+<!--Page="PostgreSQL - installazione Avvio di Parametrix su versione PSQL diversa da quella del setup"--><p><strong>Problema</strong>: non si riesce a installare correttamente postgresql 9.6, versione del setup di Parametrix.</p><p><strong>Sintomi</strong>:</p><ul><li><p>installando postgresql compare il seguente errore: failed to load sql modules</p></li><li><p>il servizio postgres non si avvia: potrebbe sembrare in esecuzione; facendo avvia/riavvia compare un messaggio che dice che si è avviato e poi è stato arrestato</p></li><li><p>Parametrix non si avvia, nel log si trovano errori riguardanti il database</p></li></ul><p><strong>Articolari correlati:</strong></p><ul><li><p><a href="https://stackoverflow.com/questions/67265537/postgresql-downgrade-password-encryption-from-scram-to-md5">https://stackoverflow.com/questions/67265537/postgresql-downgrade-password-encryption-from-scram-to-md5</a></p></li></ul><p><strong>Soluzione</strong>:</p><ol start="1" type="1"><li><p>Disinstallare postgres</p></li><li><p>Creare un utente locale “postgres” psw: postgres con privilegi di amministratore</p></li><li><p>Installare una diversa versione di postegres (partire da postgresql-9.6.24-1 e andare a scendere, se non si riesce con queste provare con postgresql-13.5-1)</p></li><li><p>Se non ci sono messaggi di errore procedere, altrimenti cambiare versione di postgres</p></li><li><p>Nella cartella di installazione di postgres aprire il file "postgresql.conf":</p><ol start="1" type="a"><li><p>modificare "password_encryption" in "md5"</p></li><li><p>salvare il file</p></li></ol></li><li><p>Nella cartella di installazione di postgres aprire il file "pg_hba.conf"</p><ol start="1" type="a"><li><p>modificare le prime 3 occorrenze di "scram-sha-256" in "trust"</p></li><li><p>salvare il file</p></li></ol></li><li><p>riavviare il servizio</p></li><li><p>Lanciare cmd.exe e digitare <strong>runas /user:postgres cmd.exe</strong></p></li><li><p><strong>cd <postgresinstallationpath>\</postgresinstallationpath></strong></p></li><li><p><strong>\password postgres</strong></p></li><li><p>Inserire la password scelta</p></li><li><p>Confermare la password scelta</p></li><li><p>Nella cartella di installazione di postgres aprire il file "pg_hba.conf"</p><ol start="1" type="a"><li><p>modificare le prime 3 occorrenze di "scram-sha-256" in "md5"</p></li><li><p>salvare il file</p></li></ol></li><li><p>riavviare il servizio</p></li><li><p><strong>cd <postgresinstallationpath>\bin</postgresinstallationpath></strong></p></li><li><p><strong>psql -c "CREATE USER donatoni WITH PASSWORD 'Parametr1x2017';"</strong></p></li><li><p><strong>psql -c "ALTER USER donatoni WITH SUPERUSER";</strong></p></li><li><p>Trovare la chiave di registro: "Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\postgresql-x64-13." (il nome della chiave dipende dalla versione di posgresql installata; NB: la chiave deve esistere, altrimenti c'è stato un problema):</p><ol start="1" type="a"><li><p>modificare Display Name in: <strong>postgresql-9.6</strong></p></li><li><p>modificare Image Path: "<postgresinstallationpath>\bin\pg_ctl.exe" runservice -N "<strong>postgresql-9.6</strong>" -D "<postgresinstallationpath>\data" -w (dovrebbe cambiare solo la parte in grassetto)</postgresinstallationpath></postgresinstallationpath></p></li></ol></li><li><p>Controllare che esista la chiave Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\<strong>PostgreSQL\Installations\postgresql-9.6:</strong></p><ol start="1" type="a"><li><p>se non c'è crearla</p></li><li><p>creare campo di tipo "Valore stringa": nome "<strong>Base Directory</strong>", valore "<strong><postgresinstallationpath>"</postgresinstallationpath></strong></p></li></ol></li><li><p>riavviare il servizio</p></li></ol><!--Label="key_psql_05"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---servizio-postgresql-non-avviato"><a class="header" href="#postgresql---servizio-postgresql-non-avviato">PostgreSQL - Servizio postgresql non avviato</a></h1>
+<!--Page="PostgreSQL - Servizio postgresql non avviato"--><p><strong>Problema: </strong>problemi avvio postgresql.</p><p><strong>Sintomi/situazione</strong>:</p><ul><li><p>Parametrix non parte</p></li><li><p>log Parametrix: errore su preparazione/creazione/collegamento database</p></li><li><p>Gestione attività > Servizi:</p><ul><li><p>servizio postgresql presente e correttamente intallato</p></li><li><p>Stato servizio postgresql "Arrestato" (in generale non è "In esecuzione") </p></li></ul></li></ul><p><strong>Soluzione:</strong></p><ol start="1" type="1"><li><p>Aprire l'applicazione per la gestione dei Servizi</p><div><img src="attachments/PostgreSQL_-_Servizio_postgresql_non_avviato/Postgresql01.png" alt="Postgresql01.png" width="474"></div></li></ol><p></p><ol start="1" type="1"><li><p>Cliccare con il tasto destro su postgresql e selezionare "Proprietà"</p><div><img src="attachments/PostgreSQL_-_Servizio_postgresql_non_avviato/Postgresql02.png" alt="Postgresql02.png" width="480"></div></li><li><p>Nel tab "Generale" aprire il menù a tendina "Tipo di avvio"</p><div><img src="attachments/PostgreSQL_-_Servizio_postgresql_non_avviato/image2023-5-23_8-37-21.png" alt="image2023-5-23_8-37-21.png" width="482"></div></li><li><p>Impostare su "Automatico"</p><div><img src="attachments/PostgreSQL_-_Servizio_postgresql_non_avviato/image2023-5-23_8-39-54.png" alt="image2023-5-23_8-39-54.png" width="482"></div></li><li><p>Avviare manualmente il servizio postresql</p><div><img src="attachments/PostgreSQL_-_Servizio_postgresql_non_avviato/image2023-5-23_8-36-24.png" alt="image2023-5-23_8-36-24.png" width="480"></div></li><li><p>Avviare Parametrix</p></li></ol><!--Label="key_psql_06"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---errori-in-fase-di-installazione-su-windows-xp"><a class="header" href="#postgresql---errori-in-fase-di-installazione-su-windows-xp">PostgreSQL - Errori in fase di installazione su Windows XP</a></h1>
+<!--Page="PostgreSQL - Errori in fase di installazione su Windows XP"--><p><strong>Problema: </strong>problemi installazione postgresql su Windows XP.</p><p><strong>Sintomi/situazione:</strong></p><ul><li><p>comparsa di errore in fase di installazione postgresql tramite setup o cmd</p></li></ul><p><strong>Soluzione</strong>:</p><ol start="1" type="1"><li><p>comparsa errore in fase di installazione tramite setup:<br></p><div><img src="attachments/PostgreSQL_-_Errori_in_fase_di_installazione_su_Windows_XP/immagine_backup_1.webp" alt="immagine_backup_1.webp" width="376"></div><p> </p><ol start="1" type="a"><li><p>controllare se le librerie sono già presenti: se ci sono librerie duplicate, disinstallarle tutte manualmente</p></li><li><p>provare a installare le vc runtime manualmente, si trovano al seguente path:<br>\\fileserver01\discoutec\UfficioTecnicoProgrammazione\Programmi Esterni\Installer Vari\Visual-C-Runtimes-All-in-One-Sep-2019 (1)<br></p></li></ol></li><li><p>se compare il seguente errore in fase di installazione tramite cmd:<br></p><div><img src="attachments/PostgreSQL_-_Errori_in_fase_di_installazione_su_Windows_XP/immagine_backup_2.webp" alt="immagine_backup_2.webp" width="498"></div><p> </p><ol start="1" type="a"><li><p>probabilmente la vc++ 2013 x86 non è stata installata correttamente</p></li><li><p>controllare se le librerie sono già presenti: se ci sono librerie duplicate, disinstallarle tutte manualmente</p></li><li><p>provare a lanciarla a mano, si trovano al seguente path:<br>\\fileserver01\discoutec\UfficioTecnicoProgrammazione\Programmi Esterni\Installer Vari\vcredist_x86</p></li></ol></li></ol><p></p><!--Label="key_psql_07"--><div style="break-before: page; page-break-before: always;"></div><h1 id="postgresql---servizio-postgresql-si-avvia-e-si-arresta-subito"><a class="header" href="#postgresql---servizio-postgresql-si-avvia-e-si-arresta-subito">PostgreSQL - Servizio postgresql si avvia e si arresta subito</a></h1>
+<!--Page="PostgreSQL - Servizio postgresql si avvia e si arresta subito"--><p><strong>Problema</strong>: postgresql si arresta immediatamente, sia avviato in automatico sia manualmente</p><p><strong>Sintomi</strong>:</p><ul><li><p>Parametrix non si avvia</p></li><li><p>log Parametrix: errori sul database, scadenza timeout su tentativi avvio</p></li><li><p>avviando manualmente il servzio postgresql compare un messaggio che dice che PostgreSQL viene avviato e quindi arrestato</p></li><li><p>nel log di postgresql compare un messaggio simile al seguente:<br>2024-04-19 10:42:24 CEST LOG: il database è stato arrestato alle 2024-04-18 19:46:42 CEST<br>2024-04-19 10:42:24 CEST LOG: il record del checkpoint primario non è valido<br>2024-04-19 10:42:24 CEST LOG: il record del checkpoint secondario non è valido<br>2024-04-19 10:42:24 CEST PANICO: localizzazione di un record di checkpoint valido fallita<br>2024-04-19 10:42:24 CEST LOG: avvio del processo (PID 512) è stato terminato dall'eccezione 0xC0000409<br>2024-04-19 10:42:24 CEST SUGGERIMENTO: Consulta il file include C "ntstatus.h" per una spiegazione del valore esadecimale.<br>2024-04-19 10:42:24 CEST LOG: avvio interrotto a causa del fallimento del processo di avvio<br>2024-04-19 10:42:24 CEST LOG: il database è stato arrestato<br> text file</p></li></ul><p></p><p class="media-group"><p><a href='attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/postgresql-2024-04-19_104224.log.txt'>attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/attachments/PostgreSQL_-_Servizio_postgresql_si_avvia_e_si_arresta_subito/postgresql-2024-04-19_104224.log.txt</a></p><p></p><p><strong>Soluzione</strong>:</p><ul><li><p>aprire il cmd</p></li><li><p>andare nella cartella "bin" di postgres: cmd C:\...\PostgreSQL\9.6\bin</p></li><li><p>digitare il seguente comando: pg_resetxlog DATADIR</p></li><li><p>avviare manualmente il servizio postgresql</p></li></ul><p><strong>Articoli correlati</strong>: </p><ul><li><p><a href="https://stackoverflow.com/questions/8799474/postgresql-error-panic-could-not-locate-a-valid-checkpoint-record" data-card-appearance="inline">https://stackoverflow.com/questions/8799474/postgresql-error-panic-could-not-locate-a-valid-checkpoint-record</a> </p></li></ul><!--Label="key_psql_08"--><div style="break-before: page; page-break-before: always;"></div><h1 id="parametrix-non-si-avvia-senza-dare-errori"><a class="header" href="#parametrix-non-si-avvia-senza-dare-errori">Parametrix non si avvia senza dare errori</a></h1>
+<ul>
+<li><a href="parametrix_non_si_avvia_senza_dare_errori.html#note">Note</a></li>
+</ul>
+<!--Page="Parametrix non si avvia senza dare errori"--><p>Sintomi:</p><ul><li>Parametrix non si avvia, non si vede neanche il logo di caricamento (NB: su Windows XP non si vede mai il logo di caricamento)</li><li>Log Parametrix: vuoto</li><li>Event Viewer di Windows: vuoto</li></ul><p>Possibile causa di errore:</p><ul><li>corruzione di file di configurazione di Windows su cui si appoggiano alcuni dati di Parametrix</li></ul><p>Possibile soluzione:</p><ul><li>cancellare questo tipo di file</li></ul><p>Questi file si trovano in una cartella nascosta. Per raggiungere tale cartella ci sono due possibili metodi.</p><p>Metodo 1:</p><ol type="1" start="1"><li>Aprire l'Esplora Risorse di Windows</li><li>Andare nella cartella C del computer</li><li>Entrare nella Utenti (o Users) </li><li>Entrare nella cartella dello specifico utente</li><li>Cliccare su Visualizza > Elementi Nascosti</li><li>Entrare nella cartella AppData</li><li>Entrare nella cartella Local</li><li>Entrare nella cartella Donatoni_Macchine_Srl</li></ol><p>Metodo 2:</p><ol type="1" start="1"><li>Aprire l'Esplora Risorse di Windows</li><li>Digitare nella barra in alto "%localappdata%"</li><li>Entrare nella cartella Donatoni_Macchine_Srl</li></ol><p>Una volta raggiunta questa cartella:</p><ol type="1" start="1"><li>Cancellare tutte le cartelle che iniziano con il nome "GioCut"</li><li>Cancellare tutte le cartelle che iniziano con il nome "Recovery"</li></ol><p>Dopo aver cancellato il file riavviare Parametrix.</p>
+<h1 id="note"><a class="header" href="#note">Note</a></h1>
+<p>Su questo file si appoggiano alcune configurazioni di Parametrix, come il file correntemente in uso per la gestione delle lavorazioni manuali (Taglio Singolo, Scavo, Spianatura e Taglio Singolo).</p><p>Una volta cancellato il file suggerire all'operatore bordo macchina di controllare i parametri di tali operazioni nel caso le si stesse utilizzando prima del riscontrarsi della problematica.</p><p>Dalla versione 4.9.2.8 è stato rimosso l'utilizzo di questo tipo di file, quindi questa procedura è valida fino alla versione precedente di Parametrix, cioè la 4.9.2.7. </p><!--Label="key_prx_03"--><div style="break-before: page; page-break-before: always;"></div><h1 id="installazione-postgresql"><a class="header" href="#installazione-postgresql">Installazione PostgreSQL</a></h1>
+<!--Page="Installazione PostgreSQL"--><p><p><a href='attachments/Installazione_PostgreSQL/Problema_installazione_postgresql.msg'>Problema_installazione_postgresql.msg</a></p><p><a href='attachments/Installazione_PostgreSQL/I_Postgresql_error_post_install.msg'>I_Postgresql_error_post_install.msg</a></p><!--Label="key_t_prx_psql_instal"--><div style="break-before: page; page-break-before: always;"></div><h1 id="parametrix-viene-chiuso-dal-sistema-operativo"><a class="header" href="#parametrix-viene-chiuso-dal-sistema-operativo">Parametrix viene chiuso dal sistema operativo</a></h1>
+<ul>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#allavvio-di-parametrix-compare-una-finestra-di-avviso-per-indicare-che-ci-sono-stati-problemi-e-lapplicativo-deve-essere-chiuso">All'avvio di Parametrix compare una finestra di avviso per indicare che ci sono stati problemi e l'applicativo deve essere chiuso.</a></li>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#finch%C3%A8-non-si-preme-su-chiudi-parametrix-continua-a-funzionare">(finchè non si preme su chiudi Parametrix continua a funzionare)</a></li>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#non-compaiono-errori-sul-log-di-parametrix-lerrore-%C3%A8-visibile-sullevent-viewer-di-windows">Non compaiono errori sul log di Parametrix, l'errore è visibile sull'event viewer di windows</a></li>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#possibili-cause">Possibili cause</a></li>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="parametrix_viene_chiuso_dal_sistema_operativo.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Parametrix viene chiuso dal sistema operativo"-->
+<h2 id="allavvio-di-parametrix-compare-una-finestra-di-avviso-per-indicare-che-ci-sono-stati-problemi-e-lapplicativo-deve-essere-chiuso"><a class="header" href="#allavvio-di-parametrix-compare-una-finestra-di-avviso-per-indicare-che-ci-sono-stati-problemi-e-lapplicativo-deve-essere-chiuso">All'avvio di Parametrix compare una finestra di avviso per indicare che ci sono stati problemi e l'applicativo deve essere chiuso.</a></h2>
+<h2 id="finchè-non-si-preme-su-chiudi-parametrix-continua-a-funzionare"><a class="header" href="#finchè-non-si-preme-su-chiudi-parametrix-continua-a-funzionare">(finchè non si preme su chiudi Parametrix continua a funzionare)</a></h2>
+<h2 id="non-compaiono-errori-sul-log-di-parametrix-lerrore-è-visibile-sullevent-viewer-di-windows"><a class="header" href="#non-compaiono-errori-sul-log-di-parametrix-lerrore-è-visibile-sullevent-viewer-di-windows">Non compaiono errori sul log di Parametrix, l'errore è visibile sull'event viewer di windows</a></h2>
+<p><br></p>
+<h2 id="possibili-cause-35"><a class="header" href="#possibili-cause-35">Possibili cause</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><ol type="1" start="1"><li>Data e ora del sistema operativo</li></ol></div>
+<h2 id="possibili-soluzioni-35"><a class="header" href="#possibili-soluzioni-35">Possibili soluzioni</a></h2>
+<div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><!-- <placeholder>You may want to use a panel to highlight important steps.</placeholder> --><ol type="1" start="1"><li>Impostare correttamente data e ora di windows</li></ol></div>
+<h2 id="articoli-collegati-35"><a class="header" href="#articoli-collegati-35">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="parametrix"--><!--Label="windowsxp"--><!--Label="kb-troubleshooting-article"--><!--Label="key_prx_04"--><div style="break-before: page; page-break-before: always;"></div><h1 id="problemi-di-visualizzazione-con-impostazioni-schermo-non-standard"><a class="header" href="#problemi-di-visualizzazione-con-impostazioni-schermo-non-standard">Problemi di visualizzazione con impostazioni schermo non standard</a></h1>
+<ul>
+<li><a href="problemi_di_visualizzazione_con_impostazioni_schermo_non_standard.html#procedura">Procedura</a></li>
+<li><a href="problemi_di_visualizzazione_con_impostazioni_schermo_non_standard.html#note">Note</a></li>
+</ul>
+<!--Page="Problemi di visualizzazione con impostazioni schermo non standard"--><p>Installando Parametrix su un computer con impostazioni schermo non standard (es: ridimensionamento 200%), può capitare di riscontrare alcuni problemi:</p><ul><li>visualizzazione anomala delle varie finestre di Parametrix</li><li>visualizzazione anomala di alcune icone di Parametrix</li><li>visualizzazione anomala di render effettuati con la funzionalità di Macchia Aperta</li><li>...</li></ul><p>Per risolvere questo tipo di problemi si può provare ad agire sui DPI dell'applicazione, come spiegato nella seguente procedura.</p>
+<h1 id="procedura"><a class="header" href="#procedura">Procedura</a></h1>
+<p>1 - cliccare con il tasto destro sull'eseguibile di Parametrix</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/01.png" alt="01.png"></p><p><br></p><p>2 - cliccare su "Proprietà"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/02.png" alt="02.png"></p><p><br></p><p>3 - andare nella finestra "Compatibilità"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/03.png" alt="03.png"></p><p><br></p><p>4 - cliccare il pulsante di modifica impostazioni per DPI elevati</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/04.png" alt="04.png"></p><p><br></p><p>5 - provare a modificare le impostazioni, di default dovrebbero esserci i flag non spuntati</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/05.png" alt="05.png"></p><p><br></p><p>6 - provare a modificare "DPI programma"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/06.png" alt="06.png"></p><p><br></p><p>7 - provare a modificare "Esegui l'override del comportamento di ridimensionamento DPI elevati." con le varie opzioni messe a disposizione da "Ridimensionamento eseguito per:"</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/07.png" alt="07.png"></p><p><br></p><p>8 - provare a modificare entrambi i flag, con le diverse opzioni messe a disposizione</p><p><img src="attachments/Problemi_di_visualizzazione_con_impostazioni_schermo_non_standard/08.png" alt="08.png"></p><p><br></p>
+<h1 id="note-1"><a class="header" href="#note-1">Note</a></h1>
+<p>Ad oggi non c'è una soluzione univoca per tutte le casistiche: la combinazione di impostazioni corretta che risolve il problema dipende molto dallo specifico contesto, per questo si suggerisce di provare un passo per volta con i diversi flag.</p><p>La procedura è stata ideata per PC con Windows 10 e Windows 11.</p><p>Su Windows 7 non c'è possibilità di agire su queste impostazioni.</p><p>La combinazione statisticamente più efficace con risoluzione 125% (caso tipico) sembra essere:</p><ul><li>spunta solo sul secondo flag</li><li>dal menu a tendina del secondo flag scegliere l'opzione "Sistema"</li></ul><p><br></p><p><br></p><!--Label="key_prx_05"--><div style="break-before: page; page-break-before: always;"></div><h1 id="problemi-dxf"><a class="header" href="#problemi-dxf">Problemi DXF</a></h1>
+<ul>
+<li><a href="problemi_dxf.html#parametrix-non-visualizza-i-dxf-e-non-importa-i-dxf">Parametrix non visualizza i DXF e non importa i DXF</a></li>
+</ul>
+<!--Page="Problemi DXF"-->
+<h1 id="parametrix-non-visualizza-i-dxf-e-non-importa-i-dxf"><a class="header" href="#parametrix-non-visualizza-i-dxf-e-non-importa-i-dxf">Parametrix non visualizza i DXF e non importa i DXF</a></h1>
+<p><strong>Problema:</strong></p><ul><li>Parametrix non importa i DXF</li><li>Parametrix non visualizza l'anteprima dei DXF</li></ul><p><strong>Sintomi</strong>:</p><ul><li>Parametrix non visualizza l'anteprima dei DXF</li><li>Parametrix da un errore generico quando si provano ad importare i DXF</li><li>Log Parametrix:  errore su CopyModules.dll</li><li>Parametro "DXF Tutto Polilinee" nel secondo lucchetto attivo (parametro NewImportDxf = True sul config.ini)</li><li>Gli stessi file su cui si vede il problema non danno problemi se utilizzati su altri PC (i DXF sono corretti)</li></ul><p>Il problema è tipico dei PC ufficio, ma può capitare anche su PC bordo macchina.</p><p>Per far si che l'importazione dei DXF funzioni correttamente si devono aggiornare alcune DLL del Sistema Operativo.</p><p><strong>Soluzione:</strong></p><ol type="1" start="1"><li>copiare le due seguenti DLL Teigha sul proprio PC locale:<ol type="a" start="1"><li><strong>attachments/Problemi_DXF/msvcp100.dll</strong></li><li><strong>attachments/Problemi_DXF/msvcr100.dll</strong></li></ol></li><li>le DLL si possono trovare in due posti:<ol type="a" start="1"><li>in allegato nella seguente pagina</li><li>all'indirizzo: <strong>\\FILESERVER01\DiscoUTec\UfficioTecnicoProgrammazione\Programmi Esterni\Files Programmi\DLL Teigha</strong></li></ol></li><li>copiare entrambe le DLL dal proprio PC locale al desktop del PC del cliente</li><li>copiare entrambe le DLL dal desktop del PC del cliente nei seguenti percorsi del PC del cliente:<ol type="a" start="1"><li><strong>C:\Windows\System32</strong></li><li><strong>C:\Windows\SysWOW64</strong></li></ol></li><li>in alternativa al punto 4 si possono copiare entrambe le DLL nella cartella di installazione di Parametrix (solitamente C:\Parametrix)</li><li>cancellare entrambe le DLL dal desktop del PC del cliente</li></ol><p><strong>NB</strong>: non si possono copiare direttamente le DLL nei due path indicati del PC del cliente tramite TeamViewer, per questo la procedura indica di passare prima dal desktop del PC del cliente.</p><p>Di seguito le DLL.</p><p><em><p><a href='attachments/Problemi_DXF/msvcp100.dll'>msvcp100.dll</a></p><p><a href='attachments/Problemi_DXF/msvcr100.dll'>msvcr100.dll</a></p></em></p><!--Label="key_prx_06"--><!--Label="dxf"--><div style="break-before: page; page-break-before: always;"></div><h1 id="pulsante-conferma-foto-non-funziona"><a class="header" href="#pulsante-conferma-foto-non-funziona">Pulsante Conferma Foto non funziona</a></h1>
+<ul>
+<li><a href="pulsante_conferma_foto_non_funziona.html#parametrix--gestionelistaprogrammi">Parametrix + GestioneListaProgrammi</a></li>
+</ul>
+<!--Page="Pulsante Conferma Foto non funziona"-->
+<h1 id="parametrix--gestionelistaprogrammi"><a class="header" href="#parametrix--gestionelistaprogrammi">Parametrix + GestioneListaProgrammi</a></h1>
+<p>Configurazione:</p><ul><li>macchine belt</li><li>pc ufficio con Parametrix</li><li>pc macchina con GestioneListaProgrammi</li></ul><p>Sintomi:</p><ul><li>il pulsante conferma foto nel panel perimetro di Parametrix ufficio non funziona</li><li>premendo il pulsante Parametrix rimane bloccato un tot di secondi, dopo i quali compare il messaggio generico "Non sono riuscito a concludere l'operazione"</li></ul><p>Log Parametrix:</p><ul><li>errore su server non trovato</li></ul><p>Passi di risoluzione pc ufficio e pc macchina.</p><p>Pc ufficio:</p><ul><li>config.ini:<br><ul><li>CommandoFoto = FOTO</li><li>IPServer = indirizzo macchina</li><li>PortaServer = numero di porta</li></ul></li><li>verificare che la macchina sia raggiungibile dall'ufficio utilizzando l'indirizzo ip impostato nel parametro IPServer (utilizzare esplora risorse di windows)</li><li>sul firewall la porta impostata nel parametro PortaServer deve essere aperta in uscita</li></ul><p>Pc macchina:</p><ul><li>sul firewall la porta impostata nel parametro PortaServer config.ini del pc ufficio deve essere aperta in ingresso</li><li>il software RiceviComandi, che si occupa di ricevere e gestire i comandi dal Parametrix del pc ufficio, deve essere avviato correttamente:<ul><li>solitamente si trova sul desktop</li><li>se non lo si trova si può controllare nel file AvvioProgrammi.bat (Windows+R, shell:startup)</li><li>se il processo è avviato chiuderlo e riavviarlo manualmente</li></ul></li></ul><p><br></p><!--Label="key_prx_07"--><div style="break-before: page; page-break-before: always;"></div><h1 id="twin-invio-immagini-a-monitor-di-scarico-alfabeti-diversi"><a class="header" href="#twin-invio-immagini-a-monitor-di-scarico-alfabeti-diversi">TWIN Invio immagini a Monitor di scarico (alfabeti diversi)</a></h1>
+<ul>
+<li><a href="twin_invio_immagini_a_monitor_di_scarico_(alfabeti_diversi).html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="twin_invio_immagini_a_monitor_di_scarico_(alfabeti_diversi).html#possibili-cause">Possibili cause</a></li>
+<li><a href="twin_invio_immagini_a_monitor_di_scarico_(alfabeti_diversi).html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="twin_invio_immagini_a_monitor_di_scarico_(alfabeti_diversi).html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="TWIN Invio immagini a Monitor di scarico (alfabeti diversi)"-->
+<h2 id="spiegazione-dellerrore-35"><a class="header" href="#spiegazione-dellerrore-35">Spiegazione dell'errore</a></h2>
+<p>Macchina in Grecia, non venivano visualizzate le immagini delle lavorazioni sul monitor di scarico</p>
+<h2 id="possibili-cause-36"><a class="header" href="#possibili-cause-36">Possibili cause</a></h2>
+<p>Impostazioni di lingua errate</p>
+<h2 id="possibili-soluzioni-36"><a class="header" href="#possibili-soluzioni-36">Possibili soluzioni</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'>Seguire i seguenti step:<br><br><ol type="1" start="1"><li>Aprire Pannello di controllo</li><li>Andare in Area Geografica</li><li>Tab opzioni di amministrazione</li><li>Lingua corrente per i programmi non Unicode: verificare che la lingua impostata sia la stessa tra i due pc (bordo macchina e scarico)</li><li>Controllare anche le altre impostazioni di lingua che siano corrette</li></ol></div>
+<h2 id="articoli-collegati-36"><a class="header" href="#articoli-collegati-36">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="twin"--><!--Label="monitor"--><!--Label="scarico"--><!--Label="kb-troubleshooting-article"--><!--Label="key_prx_08"--><div style="break-before: page; page-break-before: always;"></div><h1 id="problemi-di-visualizzazione-anteprime-pezzi-o-foto-nera"><a class="header" href="#problemi-di-visualizzazione-anteprime-pezzi-o-foto-nera">Problemi di visualizzazione anteprime pezzi o foto nera</a></h1>
+<!--Page="Problemi di visualizzazione anteprime pezzi o foto nera"--><p>In Parametrix può accadere che non vengano visualizzate correttamente le anteprime dei pezzi nella lista di destra, questo problema si riflette poi anche nel sistema di stampa etichette, i sintomi sono quindi:</p><ul><li><p>Non si visualizzano le anteprime dei pezzi nella colonna di destra, come mostrato in figura 1;</p></li><li><p>Non si visualizzano le anteprime dei pezzi nel pannello di stampa etichette, come mostrato in figura 2; </p></li></ul><p>Un altro problema con la stessa metodologia di risoluzione è quando la foto della lastra risulta nera ma nel log non ci sono errori.</p><p>Tipicamente questi errori si presentano su installazioni PC Ufficio, dove l’hardware è diverso da quello standard presente sulle macchine.</p><div><img src="attachments/Problemi_di_visualizzazione_anteprime_pezzi_o_foto_nera/Screenshot_2024-06-28_103450.png" alt="Screenshot_2024-06-28_103450.png" width="756"></div><div><img src="attachments/Problemi_di_visualizzazione_anteprime_pezzi_o_foto_nera/Screenshot_2024-06-28_104139.png" alt="Screenshot_2024-06-28_104139.png" width="760"></div><p>Il problema è dovuto all’interfaccia API di computer grafica, in Parametrix sono stati predisposti dei parametri per permettere di cambiare l’interfaccia in uso:</p><ul><li><p><strong>MultiSlab_EnableDirect3D_ForMainViewer</strong></p></li><li><p><strong>MultiSlab_EnableDirect3D_ForPreviewViewer</strong></p></li><li><p><strong>EnableDirect3D_OnlyInit</strong></p></li></ul><p>Questi parametri vanno impostati a True per forzare parametrix ad utilizzare Direct3D invece che OpenGL.</p><p>Per la stampa etichette invece:</p><ul><li><p><strong>PrintLabels_Advanced_Command_SetViewerRendererType </strong>[disponibile da v4.11.0.3]</p></li></ul><p>Questo parametro va impostato al valore Direct3D.</p><p></p><!--Label="anteprime-pezzi"--><!--Label="direct3d"--><!--Label="direct"--><!--Label="foto-nera"--><!--Label="anteprima-pezzi"--><div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-rete"><a class="header" href="#troubleshooting-rete">Troubleshooting Rete</a></h1>
+<!--Page="Troubleshooting Rete"--><p>In questa sezione vengono trattati problemi riscontrati in fase di impostazione configurazioni di rete, tipicamente tra ufficio e macchina.</p><p>
+<ul>
+<li><a href="./teamviewer_non_funzionante.html">Teamviewer non funzionante</a></li>
+<li><a href="./visualizzazione_cartelle_condivise.html">Visualizzazione cartelle condivise</a></li>
+</ul>
+</p><!--Label="key_net_00"--><div style="break-before: page; page-break-before: always;"></div><h1 id="teamviewer-non-funzionante"><a class="header" href="#teamviewer-non-funzionante">Teamviewer non funzionante</a></h1>
+<ul>
+<li><a href="teamviewer_non_funzionante.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="teamviewer_non_funzionante.html#possibili-cause">Possibili cause</a></li>
+<li><a href="teamviewer_non_funzionante.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="teamviewer_non_funzionante.html#related-articles-appear-here-based-on-the-labels-you-select-click-to-edit-the-macro-and-add-or-change-labelsarticoli-collegati">Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.Articoli collegati</a></li>
+</ul>
+<!--Page="Teamviewer non funzionante"-->
+<h2 id="spiegazione-dellerrore-36"><a class="header" href="#spiegazione-dellerrore-36">Spiegazione dell'errore</a></h2>
+<p>Il client di teamviewer non si connette e neanche il sito web di team viewer è raggiungibile</p>
+<h2 id="possibili-cause-37"><a class="header" href="#possibili-cause-37">Possibili cause</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p>1. Connessione ad internet mancante</p><p>2. Versione di teamviewer troppo vecchia</p><p>3. Blocco sul firewall di windows</p></div>
+<h2 id="possibili-soluzioni-37"><a class="header" href="#possibili-soluzioni-37">Possibili soluzioni</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p>1. Controllare connessione ad internet</p><p>2. Disabilitare il firewall di windows e provare ad utilizzare teamviewer, se funziona:</p><p style="margin-left: 30.0px;">a. Abilitare sul firewall la porta 5938 (UDP e TCP) sia in ingresso che in uscita e riabilitare il firewall.</p><p>3. Chiedere al cliente di verificare se siano presenti eventuali blocchi.</p><p><br></p></div>
+<h2 id="related-articles-appear-here-based-on-the-labels-you-select-click-to-edit-the-macro-and-add-or-change-labelsarticoli-collegati"><a class="header" href="#related-articles-appear-here-based-on-the-labels-you-select-click-to-edit-the-macro-and-add-or-change-labelsarticoli-collegati">Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.Articoli collegati</a></h2>
+<p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="teamviewer"--><!--Label="kb-troubleshooting-article"--><!--Label="key_net_01"--><div style="break-before: page; page-break-before: always;"></div><h1 id="visualizzazione-cartelle-condivise"><a class="header" href="#visualizzazione-cartelle-condivise">Visualizzazione cartelle condivise</a></h1>
+<ul>
+<li><a href="visualizzazione_cartelle_condivise.html#spiegazione-dellerrore">Spiegazione dell'errore</a></li>
+<li><a href="visualizzazione_cartelle_condivise.html#possibili-cause">Possibili cause</a></li>
+<li><a href="visualizzazione_cartelle_condivise.html#possibili-soluzioni">Possibili soluzioni</a></li>
+<li><a href="visualizzazione_cartelle_condivise.html#articoli-collegati">Articoli collegati</a></li>
+</ul>
+<!--Page="Visualizzazione cartelle condivise"-->
+<h2 id="spiegazione-dellerrore-37"><a class="header" href="#spiegazione-dellerrore-37">Spiegazione dell'errore</a></h2>
+<p>Dall'ufficio non è possibile visualizzare le cartelle condivise. Messaggio di errore: <strong>Impossibile aprire cartella condivisa (utente guest)</strong></p>
+<h2 id="possibili-cause-38"><a class="header" href="#possibili-cause-38">Possibili cause</a></h2>
+<p>Sono presenti dei blocco da parte di windows che impediscono l'accesso a cartelle condivise remote</p>
+<h2 id="possibili-soluzioni-38"><a class="header" href="#possibili-soluzioni-38">Possibili soluzioni</a></h2>
+<p><br></p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p>Dal pc che non riesce a visualizzare le cartelle condivise:</p><ol class="_mce_tagged_br" type="1" start="1"><li>Scrivere regedit sulla barra di ricerca di windows per apripre l'editor dei registri di sistemi</li><li>Scorrere l'albero delle cartelle posto a sinistra come segue: <strong>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters</strong></li><li>Selezionare il registro con un nome simile a questo: <strong>unauthenticated guest access</strong></li><li>Se il registro è presente impostarne il valore a 1</li><li>Riprovare ad accedere alle cartelle condivise</li></ol></div>
+<h2 id="articoli-collegati-37"><a class="header" href="#articoli-collegati-37">Articoli collegati</a></h2>
+<p><!-- <placeholder>Related articles appear here based on the labels you select. Click to edit the macro and add or change labels.</placeholder> --></p><p><div class='panelContent' style='background-color: #fff; border: 1px solid #D3D3D3; padding: 5px;'><p><br></p></div><p><br></p><p class="auto-cursor-target"><br></p><!--Label="sharedfolder"--><!--Label="ufficio"--><!--Label="kb-troubleshooting-article"--><!--Label="key_net_02"-->
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
+        <script src="hidemenu.js"></script>
+        <script src="login.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
