@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }  
         else
         {
-           // window.location.href = "login.html"; // Torna alla pagina di login se non autenticato
+           window.location.href = "login.html"; // Torna alla pagina di login se non autenticato
         }
     }    
 });
